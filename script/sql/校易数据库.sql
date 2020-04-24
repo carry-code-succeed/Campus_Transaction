@@ -17,7 +17,7 @@ drop table if exists USER_INFO;
 /*==============================================================*/
 create table ADMIN
 (
-   ADMIN_ID             VARCAHAR(22) not null,
+   ADMIN_ID             VARCHAR(22) not null,
    ADMIN_NAME           VARCHAR(40) not null,
    ADMIN_PASSWORD       VARCHAR(40) not null,
    ADMIN_PICTURE        IMAGE,
