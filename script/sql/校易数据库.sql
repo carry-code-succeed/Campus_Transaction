@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2020/4/29 20:24:17                           */
+/* Created on:     2020/4/29 20:35:30                           */
 /*==============================================================*/
 
 
@@ -31,7 +31,6 @@ charset = utf8mb4;
 create table COMMODITY
 (
    COMMODITY_ID         VARCHAR(20) not null,
-   USER_ID              VARCHAR(22) not null,
    COMMODITY_NAME       VARCHAR(40) not null,
    COMMODITY_INFO       VARCHAR(400) not null,
    COMMODITY_PRICE      INT not null,
@@ -66,7 +65,4 @@ create table USER_INFO
    unique key UNQ_USER_INFO_USER_NAME (USER_NAME)
 )
 charset = utf8mb4;
-
-alter table COMMODITY add constraint FK_USERINFO_COMMODITY foreign key (USER_ID)
-      references USER_INFO (USER_ID) on delete restrict on update restrict;
 
