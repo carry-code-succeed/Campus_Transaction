@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2020/4/29 18:38:34                           */
+/* Created on:     2020/4/29 20:24:17                           */
 /*==============================================================*/
 
 
@@ -22,7 +22,8 @@ create table ADMIN
    ADMIN_PASSWORD       VARCHAR(40) not null,
    ADMIN_PICTURE        VARCHAR(200),
    primary key (ADMIN_ID)
-);
+)
+charset = utf8mb4;
 
 /*==============================================================*/
 /* Table: COMMODITY                                             */
@@ -37,7 +38,8 @@ create table COMMODITY
    COMMODITY_PICTRUE    VARCHAR(200) not null,
    IS_PUTAWAY           VARCHAR(22) not null,
    primary key (COMMODITY_ID)
-);
+)
+charset = utf8mb4;
 
 /*==============================================================*/
 /* Table: STUDENT                                               */
@@ -48,7 +50,8 @@ create table STUDENT
    STUDENT_NAME         VARCHAR(40) not null,
    IS_REGISTER          VARCHAR(22),
    primary key (STUDENT_ID)
-);
+)
+charset = utf8mb4;
 
 /*==============================================================*/
 /* Table: USER_INFO                                             */
@@ -61,7 +64,8 @@ create table USER_INFO
    USER_PICTRUE         VARCHAR(200),
    primary key (USER_ID),
    unique key UNQ_USER_INFO_USER_NAME (USER_NAME)
-);
+)
+charset = utf8mb4;
 
 alter table COMMODITY add constraint FK_USERINFO_COMMODITY foreign key (USER_ID)
       references USER_INFO (USER_ID) on delete restrict on update restrict;
