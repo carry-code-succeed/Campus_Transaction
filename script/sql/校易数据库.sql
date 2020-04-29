@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2020/4/24 21:06:12                           */
+/* Created on:     2020/4/29 18:38:34                           */
 /*==============================================================*/
 
 
@@ -20,7 +20,7 @@ create table ADMIN
    ADMIN_ID             VARCHAR(22) not null,
    ADMIN_NAME           VARCHAR(40) not null,
    ADMIN_PASSWORD       VARCHAR(40) not null,
-   ADMIN_PICTURE        MEDIUMBLOB,
+   ADMIN_PICTURE        VARCHAR(200),
    primary key (ADMIN_ID)
 );
 
@@ -34,7 +34,7 @@ create table COMMODITY
    COMMODITY_NAME       VARCHAR(40) not null,
    COMMODITY_INFO       VARCHAR(400) not null,
    COMMODITY_PRICE      INT not null,
-   COMMODITY_PICTRUE    MEDIUMBLOB not null,
+   COMMODITY_PICTRUE    VARCHAR(200) not null,
    IS_PUTAWAY           VARCHAR(22) not null,
    primary key (COMMODITY_ID)
 );
@@ -58,7 +58,7 @@ create table USER_INFO
    USER_ID              VARCHAR(22) not null,
    USER_NAME            VARCHAR(40) not null,
    USER_PASSWORD        VARCHAR(40) not null,
-   USER_PICTRUE         MEDIUMBLOB,
+   USER_PICTRUE         VARCHAR(200),
    primary key (USER_ID),
    unique key UNQ_USER_INFO_USER_NAME (USER_NAME)
 );
