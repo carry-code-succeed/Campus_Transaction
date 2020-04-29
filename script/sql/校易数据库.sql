@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2020/4/29 20:35:30                           */
+/* Created on:     2020/4/29 20:45:06                           */
 /*==============================================================*/
 
 
@@ -31,6 +31,7 @@ charset = utf8mb4;
 create table COMMODITY
 (
    COMMODITY_ID         VARCHAR(20) not null,
+   USER_ID              VARCHAR(22),
    COMMODITY_NAME       VARCHAR(40) not null,
    COMMODITY_INFO       VARCHAR(400) not null,
    COMMODITY_PRICE      INT not null,
