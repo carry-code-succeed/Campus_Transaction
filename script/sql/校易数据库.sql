@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2020/4/29 20:45:06                           */
+/* Created on:     2020/4/30 19:51:42                           */
 /*==============================================================*/
 
 
@@ -60,6 +60,7 @@ create table USER_INFO
 (
    USER_ID              VARCHAR(22) not null,
    USER_NAME            VARCHAR(40) not null,
+   STUDENT_ID           VARCHAR(22),
    USER_PASSWORD        VARCHAR(40) not null,
    USER_PICTRUE         VARCHAR(200),
    primary key (USER_ID),
