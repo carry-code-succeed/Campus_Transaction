@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2020/4/30 19:51:42                           */
+/* Created on:     2020/4/30 20:33:59                           */
 /*==============================================================*/
 
 
@@ -48,6 +48,7 @@ create table STUDENT
 (
    STUDENT_ID           VARCHAR(22) not null,
    STUDENT_NAME         VARCHAR(40) not null,
+   USER_ID              VARCHAR(22),
    IS_REGISTER          VARCHAR(22),
    primary key (STUDENT_ID)
 )
