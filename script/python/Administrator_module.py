@@ -1,3 +1,4 @@
+ # -*- coding: utf-8 -*
 ########################################################################################################################
 def Off_the_shelf_goods(COMMODITY_ID):   # Off_the_shelf_goods = 下架商品        COMMODITY_ID = 商品ID
     import pymysql   #引入pymysql库
