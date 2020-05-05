@@ -180,5 +180,5 @@ def Log_off_user_account():   #Log_off_user_account = 注销用户账号  USER_I
 
 if __name__ == '__main__':
     app.run(host='172.19.6.224', port=6178,
-#             ssl_context='adhoc'
+            ssl_context='adhoc'
            )
