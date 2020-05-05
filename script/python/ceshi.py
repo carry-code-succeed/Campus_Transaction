@@ -12,7 +12,7 @@ def b():
     import time
     # 创建数据库连接
     config = {
-        'host': '139.196.203.66',
+        'host': '172.19.6.224',
         'port': 3306,
         'user': 'root',
         'passwd': '%E7%A0%81%E5%88%B0%E6%88%90%E5%8A%9F',
