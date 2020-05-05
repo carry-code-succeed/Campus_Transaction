@@ -19,13 +19,17 @@ def b():
         'db': 'CAMPUS_TRANSACTION_SQL',
         'charset': 'utf8mb4'
     }
+    print(config)
     db = pymysql.connect(**config)
+    print(db)
     # 初始化游标（创建游标）
     cursor = db.cursor()
+    print(cursor)
     # 执行查询，并返回受影响的行数
     cursor.execute("select * from COMMODITY")
     # 返回所有的结果集 
     result = cursor.fetchall()
+    print(result)
     para = []
     for i in result:
         text = {'id':i[0],'name':i[1],'password':i[2],'IS_PUTAWAY':i[6]}
