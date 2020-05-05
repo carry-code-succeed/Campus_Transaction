@@ -1,7 +1,6 @@
 # -*- coding: UTF-8 -*-
 import os
 import json
-from flask_cors import *
 os.environ['NLS_LANG'] = 'SIMPLIFIED CHINESE_CHINA.UTF8'
 from flask import Flask,request
 
@@ -19,6 +18,6 @@ def a():
     return aaa
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5590,
+    app.run(host='172.19.6.224', port=6178,
 #             ssl_context='adhoc'
            )
