@@ -180,5 +180,5 @@ def Log_off_user_account():   #Log_off_user_account = 注销用户账号  USER_I
 
 if __name__ == '__main__':
     app.run(host='172.19.6.224', port=6178,
-            ssl_context=('/usr/local/nginx/conf/cert/3853291_campustransaction.xyz.pem','/usr/local/nginx/conf/cert/33853291_campustransaction.xyz.key')
+            ssl_context=('/root/Campus_Transaction/script/python/cert/3853291_campustransaction.xyz.pem','/root/Campus_Transaction/script/python/cert/33853291_campustransaction.xyz.key')
            )
