@@ -103,7 +103,7 @@ def Off_the_shelf_goods():   # Off_the_shelf_goods = 下架商品        COMMODI
         return "ERROR"
 
 if __name__ == '__main__':
-    app.run(host='127.0.0.1', port=6178,
+    app.run(host='127.0.0.1', port=6170,
             ssl_context = 'adhoc'
             # ssl_context=('/root/Campus_Transaction/script/python/cert/3853291_campustransaction.xyz.pem','/root/Campus_Transaction/script/python/cert/33853291_campustransaction.xyz.key')
            )
