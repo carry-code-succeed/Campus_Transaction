@@ -28,7 +28,7 @@ def Find_item():   # Find_item = 查找商品        NameOrId = 商品名字或�
     # 执行查询，并返回受影响的行数
     sql_Q_B_C_N = "select * from COMMODITY where COMMODITY_NAME='{}' and IS_PUTAWAY='sjz'".format(NameOrId)   # sql_Q_B_C_N = Q_B_C_N  Query by commodity name  通过商品ID查询,sql语句，通过格式化对{}内容输入变量
 #     print('sql_Q_B_C_N',sql_Q_B_C_N)
-    sql_Q_B_C_I = "select * from COMMODITY where COMMODITY_NAME='{}' and IS_PUTAWAY='sjz'".format(NameOrId)   # sql_Q_B_C_I = Q_B_C_N  Query by commodity name  通过商品ID查询,sql语句，通过格式化对{}内容输入变量
+    sql_Q_B_C_I = "select * from COMMODITY where COMMODITY_ID='{}' and IS_PUTAWAY='sjz'".format(NameOrId)   # sql_Q_B_C_I = Q_B_C_N  Query by commodity name  通过商品ID查询,sql语句，通过格式化对{}内容输入变量
 #     print('sql_Q_B_C_I',sql_Q_B_C_I)
     Q_B_C_N = cursor.execute(sql_Q_B_C_N) # Q_B_C_N  Query by commodity name  通过商品ID查询
     Q_B_C_I = cursor.execute(sql_Q_B_C_I) # Q_B_C_N  Query by commodity name  通过商品ID查询
