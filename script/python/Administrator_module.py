@@ -6,56 +6,56 @@ from flask import Flask,request
 
 app = Flask(__name__)
 
-@app.route('/Q_B_C_N/', methods=[ 'POST','GET'])
-def Find_item():   # Find_item = 查找商品        NameOrId = 商品名字或商品ID
-    if request.method == "GET":
-        NameOrId = request.args.get("NameOrId")
-    else:
-        NameOrId = request.form.get_data("NameOrId")
-    import pymysql   #引入pymysql库
-    # 创建数据库连接
-    config = {           # 连接用的字典结构
-        'host': '139.196.203.66',     # 服务器ip
-        'port': 3306,       # mysql端口号
-        'user': 'root',        # mysql登录账号
-        'passwd': '%E7%A0%81%E5%88%B0%E6%88%90%E5%8A%9F',       # 密码
-        'db': 'CAMPUS_TRANSACTION_SQL',       # 数据库名字
-        'charset': 'utf8mb4'
-    }
-    db = pymysql.connect(**config)   # 对mysql进行连接
-    # 初始化游标（创建游标）
-    cursor = db.cursor()
-    # 执行查询，并返回受影响的行数
-    sql_Q_B_C_N = "select * from COMMODITY where COMMODITY_NAME='{}' and IS_PUTAWAY='sjz'".format(NameOrId)   # sql_Q_B_C_N = Q_B_C_N  Query by commodity name  通过商品ID查询,sql语句，通过格式化对{}内容输入变量
-#     print('sql_Q_B_C_N',sql_Q_B_C_N)
-    sql_Q_B_C_I = "select * from COMMODITY where COMMODITY_ID='{}' and IS_PUTAWAY='sjz'".format(NameOrId)   # sql_Q_B_C_I = Q_B_C_N  Query by commodity name  通过商品ID查询,sql语句，通过格式化对{}内容输入变量
-#     print('sql_Q_B_C_I',sql_Q_B_C_I)
-    Q_B_C_N = cursor.execute(sql_Q_B_C_N) # Q_B_C_N  Query by commodity name  通过商品ID查询
-    Q_B_C_I = cursor.execute(sql_Q_B_C_I) # Q_B_C_N  Query by commodity name  通过商品ID查询
-    if Q_B_C_N>0:
-        cursor.execute(sql_Q_B_C_N)
-        result = cursor.fetchall()  # 返回所有的结果集
-#         Traverse_to_find_product_results(result)
-        para = []
-        for i in result:
-            text = {'id':i[0],'name':i[1],'password':i[2],'IS_PUTAWAY':i[6]}
-            para.append(text)
-        db.close()
-        return json.dumps(para, ensure_ascii=False, indent=4)
-    elif Q_B_C_I>0:
-        cursor.execute(sql_Q_B_C_I)
-        result = cursor.fetchall()  # 返回所有的结果集
-#         Traverse_to_find_product_results(result)
-        para = []
-        for i in result:
-            text = {'id':i[0],'name':i[1],'password':i[2],'IS_PUTAWAY':i[6]}
-            para.append(text)
-        db.close()
-        return json.dumps(para, ensure_ascii=False, indent=4)
-    else:       # 操作失败，返回 None
-        print('没找到商品！')
-        db.close()
-        return "NONE"
+# @app.route('/Q_B_C_N/', methods=[ 'POST','GET'])
+# def Find_item():   # Find_item = 查找商品        NameOrId = 商品名字或商品ID
+#     if request.method == "GET":
+#         NameOrId = request.args.get("NameOrId")
+#     else:
+#         NameOrId = request.form.get_data("NameOrId")
+#     import pymysql   #引入pymysql库
+#     # 创建数据库连接
+#     config = {           # 连接用的字典结构
+#         'host': '139.196.203.66',     # 服务器ip
+#         'port': 3306,       # mysql端口号
+#         'user': 'root',        # mysql登录账号
+#         'passwd': '%E7%A0%81%E5%88%B0%E6%88%90%E5%8A%9F',       # 密码
+#         'db': 'CAMPUS_TRANSACTION_SQL',       # 数据库名字
+#         'charset': 'utf8mb4'
+#     }
+#     db = pymysql.connect(**config)   # 对mysql进行连接
+#     # 初始化游标（创建游标）
+#     cursor = db.cursor()
+#     # 执行查询，并返回受影响的行数
+#     sql_Q_B_C_N = "select * from COMMODITY where COMMODITY_NAME='{}' and IS_PUTAWAY='sjz'".format(NameOrId)   # sql_Q_B_C_N = Q_B_C_N  Query by commodity name  通过商品ID查询,sql语句，通过格式化对{}内容输入变量
+# #     print('sql_Q_B_C_N',sql_Q_B_C_N)
+#     sql_Q_B_C_I = "select * from COMMODITY where COMMODITY_ID='{}' and IS_PUTAWAY='sjz'".format(NameOrId)   # sql_Q_B_C_I = Q_B_C_N  Query by commodity name  通过商品ID查询,sql语句，通过格式化对{}内容输入变量
+# #     print('sql_Q_B_C_I',sql_Q_B_C_I)
+#     Q_B_C_N = cursor.execute(sql_Q_B_C_N) # Q_B_C_N  Query by commodity name  通过商品ID查询
+#     Q_B_C_I = cursor.execute(sql_Q_B_C_I) # Q_B_C_N  Query by commodity name  通过商品ID查询
+#     if Q_B_C_N>0:
+#         cursor.execute(sql_Q_B_C_N)
+#         result = cursor.fetchall()  # 返回所有的结果集
+# #         Traverse_to_find_product_results(result)
+#         para = []
+#         for i in result:
+#             text = {'id':i[0],'name':i[1],'password':i[2],'IS_PUTAWAY':i[6]}
+#             para.append(text)
+#         db.close()
+#         return json.dumps(para, ensure_ascii=False, indent=4)
+#     elif Q_B_C_I>0:
+#         cursor.execute(sql_Q_B_C_I)
+#         result = cursor.fetchall()  # 返回所有的结果集
+# #         Traverse_to_find_product_results(result)
+#         para = []
+#         for i in result:
+#             text = {'id':i[0],'name':i[1],'password':i[2],'IS_PUTAWAY':i[6]}
+#             para.append(text)
+#         db.close()
+#         return json.dumps(para, ensure_ascii=False, indent=4)
+#     else:       # 操作失败，返回 None
+#         print('没找到商品！')
+#         db.close()
+#         return "NONE"
 
 @app.route('/O_T_S_G/', methods=[ 'POST','GET'])
 def Off_the_shelf_goods():   # Off_the_shelf_goods = 下架商品        COMMODITY_ID = 商品ID
@@ -79,7 +79,7 @@ def Off_the_shelf_goods():   # Off_the_shelf_goods = 下架商品        COMMODI
     # 初始化游标（创建游标）
     cursor = db.cursor()
     # 执行查询，并返回受影响的行数
-    sql_O_T_S_G = "update COMMODITY set IS_PUTAWAY='glyxj' where COMMODITY_ID='{}' and IS_PUTAWAY='sjz'".format(COMMODITY_ID)   # sql语句，通过格式化对{}内容输入变量
+    sql_O_T_S_G = "update COMMODITY set IS_PUTAWAY='Administrator_dismounts' where COMMODITY_ID='{}' and IS_PUTAWAY='On_the_shelf'".format(COMMODITY_ID)   # sql语句，通过格式化对{}内容输入变量
     print(sql_O_T_S_G)   # sql_O_T_S_G = O_T_S_G   Off the shelf goods 下架商品
     O_T_S_G = cursor.execute(sql_O_T_S_G)   # O_T_S_G = Off the shelf goods 下架商品
     print(O_T_S_G)
