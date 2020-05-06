@@ -182,6 +182,6 @@ if __name__ == '__main__':
     import os
     key_path = os.environ.get("")
     app.run(host='127.0.0.1', port=6178,
-            , ssl_context = 'adhoc'
+            ssl_context = 'adhoc'
             # ssl_context=('/root/Campus_Transaction/script/python/cert/3853291_campustransaction.xyz.pem','/root/Campus_Transaction/script/python/cert/33853291_campustransaction.xyz.key')
            )
