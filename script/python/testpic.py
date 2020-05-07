@@ -18,8 +18,10 @@ def Save_picture():
         name = json_data.get("name")
         print(name)
         return "OK"
-    else:
+    elif request.method == 'GET':
         print('3333333333333333333333333')
+    else:
+        print('44444444444444444444444444')
         return "ERROR"
 
 if __name__ == '__main__':
