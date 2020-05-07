@@ -41,7 +41,8 @@ def Find_item():   # Find_item = 查找商品        NameOrId = 商品名字或�
 #         Traverse_to_find_product_results(result)
         para = []
         for i in result:
-            text = {'id':i[0],'name':i[1],'password':i[2],'IS_PUTAWAY':i[6]}
+            text = {'COMMODITY_ID': i[0], 'USER_ID': i[1], 'COMMODITY_NAME': i[2], 'COMMODITY_INFO': i[3],
+                    'COMMODITY_PRICE': i[4], 'COMMODITY_PICTURE': i[5], 'IS_PUTAWAY': i[6]}
             para.append(text)
         db.close()
         return json.dumps(para, ensure_ascii=False, indent=4)
