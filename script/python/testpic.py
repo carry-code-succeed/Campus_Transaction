@@ -6,7 +6,7 @@ from flask import Flask,request
 
 app = Flask(__name__)
 
-@app.route('/', methods=[ 'POST'])
+@app.route('/S_P/', methods=[ 'POST'])
 def save_picture(): 
     if request.method == 'POST':
         data = request.get_data()
