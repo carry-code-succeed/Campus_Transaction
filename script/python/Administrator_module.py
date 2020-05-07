@@ -11,7 +11,10 @@ def Find_item():   # Find_item = 查找商品        NameOrId = 商品名字或�
     if request.method == "GET":
         NameOrId = request.args.get("NameOrId")
     else:
-        NameOrId = request.form.get_data("NameOrId")
+        # NameOrId = request.form.get_data("NameOrId")
+        data = request.get_data()
+        json_data = json.loads(data.decode('utf-8'))
+        NameOrId = json_data.get("NameOrId")
     import pymysql   #引入pymysql库
     # 创建数据库连接
     config = {           # 连接用的字典结构
