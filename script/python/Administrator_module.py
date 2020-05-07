@@ -180,6 +180,6 @@ def Log_off_user_account():   #Log_off_user_account = 注销用户账号  USER_I
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=6178,
-            # ssl_context = 'adhoc'
-            ssl_context=('/root/Campus_Transaction/script/python/cert/3853291.pem','/root/Campus_Transaction/script/python/cert/33853291.key')
+            ssl_context = 'adhoc'
+            # ssl_context=('/root/Campus_Transaction/script/python/cert/3853291.pem','/root/Campus_Transaction/script/python/cert/33853291.key')
            )
