@@ -31,7 +31,7 @@ def Save_picture():
         name = ran_str+f.filename
         upload_path = os.path.join('/root/CAMPUS_TRANSACTION/USER_PICTURE',
                                    secure_filename(name))  # 注意：没有的文件夹一定要先创建，不然会提示没有该路径
-        upload_path = upload_path.replace('\','/)
+        upload_path = upload_path.replace('\','/')
         f.save(upload_path)
         return upload_path
 
