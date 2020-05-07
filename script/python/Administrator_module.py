@@ -100,7 +100,7 @@ def Off_the_shelf_goods():   # Off_the_shelf_goods = 下架商品        COMMODI
         return "ERROR"
 
 @app.route('/M_U_I/', methods=[ 'POST','GET'])
-def Modify_user_information():   # Modify_user_information = 修改用户信息  USER_ID = 用户ID    Information_name = 信息名称    information_content = 信息内容
+def Modify_user_information():   # Modify_user_information = 修改用户信息  USER_ID = 用户ID    Information_name = 信息名称    Information_content = 信息内容
     if request.method == 'GET':
         USER_ID = request.args.get("USER_ID")
         Information_name = request.args.get("Information_name")
