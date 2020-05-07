@@ -79,7 +79,7 @@ def Off_the_shelf_goods():   # Off_the_shelf_goods = 下架商品        COMMODI
     # 初始化游标（创建游标）
     cursor = db.cursor()
     # 执行查询，并返回受影响的行数
-    sql_O_T_S_G = "update COMMODITY set IS_PUTAWAY='Administrator_dismounts' where COMMODITY_ID='{}' and IS_PUTAWAY='On_the_shelf'".format(COMMODITY_ID)   # sql语句，通过格式化对{}内容输入变量
+    sql_O_T_S_G = "update COMMODITY set IS_PUTAWAY='Admin_dismounts' where COMMODITY_ID='{}' and IS_PUTAWAY='On_the_shelf'".format(COMMODITY_ID)   # sql语句，通过格式化对{}内容输入变量
     print(sql_O_T_S_G)   # sql_O_T_S_G = O_T_S_G   Off the shelf goods 下架商品
     O_T_S_G = cursor.execute(sql_O_T_S_G)   # O_T_S_G = Off the shelf goods 下架商品
     print(O_T_S_G)
