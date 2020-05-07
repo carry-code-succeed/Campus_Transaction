@@ -6,16 +6,20 @@ from flask import Flask,request
 
 app = Flask(__name__)
 
-@app.route('/S_P/', methods=[ 'POST'])
-def save_picture(): 
+@app.route('/S_P/', methods=[ 'POST','GET'])
+def Save_picture():
+    print('11111111111111111111111111')
     if request.method == 'POST':
+        print('22222222222222222222222')
         data = request.get_data()
         print(data)
         json_data = json.loads(data.decode('utf-8'))
         print(json_data)
         name = json_data.get("name")
+        print(name)
         return "OK"
     else:
+        print('3333333333333333333333333')
         return "ERROR"
 
 if __name__ == '__main__':
