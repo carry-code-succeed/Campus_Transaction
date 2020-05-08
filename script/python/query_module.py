@@ -351,6 +351,23 @@ def All_product_query_under(): #个人下架中的商品查询
 
 
 #通过商品名进行查询——具有页码，容量
+def to_int(str):   #将字符串强制转化为整形的函数
+#    if request.method == 'GET':                               
+#        str = request.args.get("str")
+#    elif request.method == 'POST':
+#        data = request.get_data()
+#        json_data = json.loads(data.decode('utf-8'))
+#        str = json_data.get("str")
+    try:
+        int(str)
+        return int(str)
+    except ValueError: #报类型错误，说明不是整型的
+        try:
+            float(str) #用这个来验证，是不是浮点字符串
+            return int(float(str))
+        except ValueError:  #如果报错，说明即不是浮点，也不是int字符串。   是一个真正的字符串
+            return False
+
 @app.route('/H_P_Q_P_C/', methods=[ 'POST','GET'])
 def Home_page_query_pag_cap(): #首页查询--通过商品名进行查询
     if request.method == 'GET':                               #pagination页码       capacity容量
@@ -378,8 +395,8 @@ def Home_page_query_pag_cap(): #首页查询--通过商品名进行查询
     #执行查询，并返回受影响的行数
     sql_Trade_name="select * from COMMODITY where COMMODITY_NAME='{}'".format(Commodity_name) #通过商品名进行查询
     Trade_name=cursor.execute(sql_Trade_name)
-    #pagination=int(pagination) #将字符串转化为整形
-    #capacity=int(capacity)    #将字符串转化为整形
+    pagination=to_int(pagination) #将字符串转化为整形
+    capacity=to_int(capacity)    #将字符串转化为整形
     if Trade_name>0:
         para = []
         #cursor.execute(sql_Trade_name)
