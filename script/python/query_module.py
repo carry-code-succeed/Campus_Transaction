@@ -408,7 +408,7 @@ def Home_page_query_pag_cap(): #首页查询--通过商品名进行查询
             para.append(text)
         Trade_name=str(Trade_name)
         pagination=str(pagination)
-        return Trade_name,pagination,json.dumps(para, ensure_ascii=False, indent=4)
+        return (Trade_name,pagination),json.dumps(para, ensure_ascii=False, indent=4)
         
     else:
         print('没有找到商品')
