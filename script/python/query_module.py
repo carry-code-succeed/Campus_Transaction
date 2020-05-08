@@ -28,7 +28,7 @@ def Home_page_query(): #首页查询--通过商品名进行查询
     db = pymysql.connect(**config) #对mysql进行连接
     # 初始化游标（创建游标）
     cursor = db.cursor()
-    if Commodity_name==():
+    if Commodity_name==None:
         print(Commodity_name)
         print(1)
         print(type(Commodity_name))
@@ -51,7 +51,7 @@ def Home_page_query(): #首页查询--通过商品名进行查询
         print(Commodity_name)
         print(2)
         print(type(Commodity_name))
-        sql_Trade_name="select * from COMMODITY where COMMODITY_NAME='{}'".format(*Commodity_name) #通过商品名进行查询
+        sql_Trade_name="select * from COMMODITY where COMMODITY_NAME='{}'".format(Commodity_name) #通过商品名进行查询
         print(sql_Trade_name)
         Trade_name=cursor.execute(sql_Trade_name)
         if Trade_name>0:
