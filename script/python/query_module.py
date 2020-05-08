@@ -49,6 +49,8 @@ def Home_page_query(): #首页查询--通过商品名进行查询
     else:    
     #执行查询，并返回受影响的行数
         print(Commodity_name)
+        print(2)
+        print(type(Commodity_name))
         sql_Trade_name="select * from COMMODITY where COMMODITY_NAME='{}'".format(*Commodity_name) #通过商品名进行查询
         print(sql_Trade_name)
         Trade_name=cursor.execute(sql_Trade_name)
