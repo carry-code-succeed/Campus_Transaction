@@ -30,6 +30,7 @@ def Home_page_query(): #首页查询--通过商品名进行查询
     cursor = db.cursor()
     if Commodity_name==():
         print(Commodity_name)
+        print(1)
         print(type(Commodity_name))
         sql_Trade=cursor.execute("select * from COMMODITY")
         print(sql_Trade)
