@@ -102,7 +102,7 @@ def User_Registration():
         cursor.execute(sql_student)
         db.commit()
         print("注册成功")
-        return "OK"
+        return "注册成功"
     except:
         print('注册失败！')
         return "ERROR"
@@ -121,6 +121,7 @@ def User_Login():
         json_data = json.loads(data.decode('utf-8'))
         user_id = json_data.get("user_id")
         user_password = json_data.get("user_password")
+    
     import pymysql
     config = {           # 连接用的字典结构
         'host': '139.196.203.66',     # 服务器ip
@@ -150,8 +151,48 @@ def User_Login():
 
     if cursor.fetchone()[1] != user_password :
         print("请输入正确的密码")
-        return "OK"
+        return "ERROR"
     print("登陆成功")
+    return "OK"
+    
+
+@app.route('/M_I/', methods=[ 'POST','GET'])
+#修改信息
+def Modify_Informaion():
+    if request.method == "GET":
+        user_id = request.args.get("user_id")#账号
+        name = request.args.get("name")#要修改的名称
+        info = request.args.get("info")#要修改的信息
+    elif request.method == 'POST':
+        data = request.get_data()
+        json_data = json.loads(data.decode('utf-8'))
+        user_id = json_data.get("user_id")
+        name = json_data.get("name")
+        info = json_data.get("info")
+        
+    import pymysql   #引入pymysql库
+    # 创建数据库连接
+    config = {           # 连接用的字典结构
+        'host': '139.196.203.66',     # 服务器ip
+        'port': 3306,       # mysql端口号
+        'user': 'root',        # mysql登录账号
+        'passwd': '%E7%A0%81%E5%88%B0%E6%88%90%E5%8A%9F',       # 密码
+        'db': 'CAMPUS_TRANSACTION_SQL',       # 数据库名字
+        'charset': 'utf8mb4'
+    }
+    db = pymysql.connect(**config)   # 对mysql进行连接
+    # 初始化游标（创建游标）
+    cursor = db.cursor()
+    sql = 'update USER_INFO set {}="{}" where USER_ID="{}"'.format(name,info,user_id)
+    M_P = cursor.execute(sql)
+    if M_P >0:
+        M_P = cursor.execute(sql)
+        db.commit()
+        db.close()
+        return "OK"
+    else:
+        db.close()
+        return "ERROR"
     
     
 if __name__ == '__main__':
@@ -161,7 +202,7 @@ if __name__ == '__main__':
            )
 
 
-# In[ ]:
+
 
 
 
