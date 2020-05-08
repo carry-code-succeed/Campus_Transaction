@@ -11,11 +11,11 @@ app = Flask(__name__)
 @app.route('/H_P_Q/', methods=[ 'POST','GET'])
 def Home_page_query(): #首页查询--通过商品名进行查询
     if request.method == 'GET':
-        Commodity_name = request.args.get("Commodity_name")
+        Commodity_name = request.args.get("*Commodity_name")
     elif request.method == 'POST':
         data = request.get_data()
         json_data = json.loads(data.decode('utf-8'))
-        Commodity_name = json_data.get("Commodity_name")
+        Commodity_name = json_data.get("*Commodity_name")
     # 创建数据库连接
     config = {
         'host': '139.196.203.66',
@@ -28,22 +28,36 @@ def Home_page_query(): #首页查询--通过商品名进行查询
     db = pymysql.connect(**config) #对mysql进行连接
     # 初始化游标（创建游标）
     cursor = db.cursor()
+    if Commodity_name==():
+        sql_Trade=cursor.execute("select * from COMMODITY")
+        if sql_Trade>0:
+            para=[]
+            #cursor.execute(sql_Trade_name)
+            result=cursor.fetchall() #返回所有数据集
+            #Traverse_to_find_product_result(result)
+            for i in result:
+                text ={'COMMODITY_NAME':i[2],'COMMODITY_PRICE':i[4],'COMMODITY_PICTURE':i[5]}
+                para.append(text)
+            return json.dumps(para, ensure_ascii=False, indent=4)
+        else:
+            print('没有找到商品')
+            return None
+    else:    
     #执行查询，并返回受影响的行数
-    sql_Trade_name="select * from COMMODITY where COMMODITY_NAME='{}'".format(Commodity_name) #通过商品名进行查询
-    Trade_name=cursor.execute(sql_Trade_name)
-    if Trade_name>0:
-        para=[]
-        #cursor.execute(sql_Trade_name)
-        result=cursor.fetchall() #返回所有数据集
-        #Traverse_to_find_product_result(result)
-        for i in result:
-            text ={'COMMODITY_NAME':i[2],'COMMODITY_PRICE':i[4],'COMMODITY_PICTURE':i[5]}
-            para.append(text)
-        return json.dumps(para, ensure_ascii=False, indent=4)
-    else:
-        print('没有找到商品')
-        return "error"
-
+        sql_Trade_name="select * from COMMODITY where COMMODITY_NAME='{}'".format(*Commodity_name) #通过商品名进行查询
+        Trade_name=cursor.execute(sql_Trade_name)
+        if Trade_name>0:
+            para=[]
+            #cursor.execute(sql_Trade_name)
+            result=cursor.fetchall() #返回所有数据集
+            #Traverse_to_find_product_result(result)
+            for i in result:
+                text ={'COMMODITY_NAME':i[2],'COMMODITY_PRICE':i[4],'COMMODITY_PICTURE':i[5]}
+                para.append(text)
+            return json.dumps(para, ensure_ascii=False, indent=4)
+        else:
+            print('没有找到商品')
+            return None
 
 
 #通过商品ID进行查询
@@ -266,7 +280,7 @@ def All_product_query(): #个人全部商品查询
         result=cursor.fetchall() #返回所有数据集
         #Traverse_to_find_product_result_mycommodity(result)
         for i in result:
-            text ={'COMMODITY_NAME':i[2],'COMMODITY_INFO':i[3],'COMMODITY_PRICE':i[4],'COMMODITY_PICTURE':i[5],'IS_PUTAWAY':i[6]}
+            text ={'COMMODITY_ID':i[0],'COMMODITY_NAME':i[2],'COMMODITY_INFO':i[3],'COMMODITY_PRICE':i[4],'COMMODITY_PICTURE':i[5],'IS_PUTAWAY':i[6]}
             para.append(text)
         return json.dumps(para, ensure_ascii=False, indent=4)
     else:
@@ -304,7 +318,7 @@ def All_product_query_on(): #个人上架中的商品查询
         result=cursor.fetchall() #返回所有数据集
         #Traverse_to_find_product_result_on(result)
         for i in result:
-            text ={'COMMODITY_NAME':i[2],'COMMODITY_INFO':i[3],'COMMODITY_PRICE':i[4],'COMMODITY_PICTURE':i[5],'IS_PUTAWAY':i[6]}
+            text ={'COMMODITY_ID':i[0],'COMMODITY_NAME':i[2],'COMMODITY_INFO':i[3],'COMMODITY_PRICE':i[4],'COMMODITY_PICTURE':i[5],'IS_PUTAWAY':i[6]}
             para.append(text)
         return json.dumps(para, ensure_ascii=False, indent=4)
     else:
@@ -342,7 +356,7 @@ def All_product_query_under(): #个人下架中的商品查询
         result=cursor.fetchall() #返回所有数据集
         #Traverse_to_find_product_result_under(result)
         for i in result:
-            text ={'COMMODITY_NAME':i[2],'COMMODITY_INFO':i[3],'COMMODITY_PRICE':i[4],'COMMODITY_PICTURE':i[5],'IS_PUTAWAY':i[6]}
+            text ={'COMMODITY_ID':i[0],'COMMODITY_NAME':i[2],'COMMODITY_INFO':i[3],'COMMODITY_PRICE':i[4],'COMMODITY_PICTURE':i[5],'IS_PUTAWAY':i[6]}
             para.append(text)
         return json.dumps(para, ensure_ascii=False, indent=4)
     else:
