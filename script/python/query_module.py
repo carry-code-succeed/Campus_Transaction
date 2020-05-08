@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 #通过商品名查询
 @app.route('/H_P_Q/', methods=[ 'POST','GET'])
-def Home_page_query(Commodity_name): #首页查询--通过商品名进行查询
+def Home_page_query(): #首页查询--通过商品名进行查询
     if request.method == 'GET':
         pagination=request.args.get("pagination")
         capacity=request.args.get("capacity")
