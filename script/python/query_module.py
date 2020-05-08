@@ -9,12 +9,16 @@ app = Flask(__name__)
 
 #通过商品名查询
 @app.route('/H_P_Q/', methods=[ 'POST','GET'])
-def Home_page_query(): #首页查询--通过商品名进行查询
+def Home_page_query(Commodity_name): #首页查询--通过商品名进行查询
     if request.method == 'GET':
+        pagination=request.args.get("pagination")
+        capacity=request.args.get("capacity")
         Commodity_name = request.args.get("Commodity_name")
     elif request.method == 'POST':
         data = request.get_data()
         json_data = json.loads(data.decode('utf-8'))
+        pagination=request.args.get("pagination")
+        capacity=request.args.get("capacity")
         Commodity_name = json_data.get("Commodity_name")
     # 创建数据库连接
     config = {
@@ -29,40 +33,43 @@ def Home_page_query(): #首页查询--通过商品名进行查询
     # 初始化游标（创建游标）
     cursor = db.cursor()
     if Commodity_name==None:
-        print(Commodity_name)
-        print(1)
-        print(type(Commodity_name))
         sql_Trade=cursor.execute("select * from COMMODITY")
-        print(sql_Trade)
         if sql_Trade>0:
-            para=[]
+            para = []
             #cursor.execute(sql_Trade_name)
-            result=cursor.fetchall() #返回所有数据集
+            result=cursor.fetchall() #返回所有数据集        
+            x=capacity*(pagination-1)+1
+            Trade_name=str(Trade_name)        
+            pagination=str(pagination)
             #Traverse_to_find_product_result(result)
-            for i in result:
-                text ={'COMMODITY_NAME':i[2],'COMMODITY_PRICE':i[4],'COMMODITY_PICTURE':i[5]}
-                para.append(text)
+            para.append(sql_Trade)
+            para.append(pagination)
+            for x in range(x,x+capacity):
+                text ={'商品名':result[x-1][2],'价格':result[x-1][4],'商品图片':result[x-1][5]}
+                para.append(text)            
             return json.dumps(para, ensure_ascii=False, indent=4)
         else:
             print('没有找到商品')
             return None
     else:    
     #执行查询，并返回受影响的行数
-        print(Commodity_name)
-        print(2)
-        print(type(Commodity_name))
         sql_Trade_name="select * from COMMODITY where COMMODITY_NAME='{}'".format(Commodity_name) #通过商品名进行查询
-        print(sql_Trade_name)
         Trade_name=cursor.execute(sql_Trade_name)
         if Trade_name>0:
-            para=[]
+            para = []
             #cursor.execute(sql_Trade_name)
-            result=cursor.fetchall() #返回所有数据集
+            result=cursor.fetchall() #返回所有数据集        
+            x=capacity*(pagination-1)+1
+            Trade_name=str(Trade_name)        
+            pagination=str(pagination)
             #Traverse_to_find_product_result(result)
-            for i in result:
-                text ={'COMMODITY_NAME':i[2],'COMMODITY_PRICE':i[4],'COMMODITY_PICTURE':i[5]}
-                para.append(text)
+            para.append(Trade_name)
+            para.append(pagination)
+            for x in range(x,x+capacity):
+                text ={'商品名':result[x-1][2],'价格':result[x-1][4],'商品图片':result[x-1][5]}
+                para.append(text)            
             return json.dumps(para, ensure_ascii=False, indent=4)
+
         else:
             print('没有找到商品')
             return None
