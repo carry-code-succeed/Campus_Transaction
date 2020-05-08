@@ -48,10 +48,10 @@ def User_Registration():
     # 1.用正则检验用户输入是否合法
     if (len(user_id.strip())==0):
         print('账号不能为空！')
-        return "ERROR"
+        return 'ERROR'
     elif(len(user_name.strip())==0):
         print('用户名不能为空！')
-        return "ERROR"
+        return 'ERROR'
     elif(len(student_id.strip())==0):
         print('学号不能为空！')
         return "ERROR"
@@ -59,7 +59,7 @@ def User_Registration():
         print('姓名不能为空！')
         return "ERROR"
     elif not(re.match('\w{6,12}$', user_password)):
-        print('请输入正确的密码！')
+        print('请输入正确的密码（6-12位）！')
         return "ERROR"
     # 2.查询数据库中账号和用户名是否已经被注册
     sql_userid = 'select USER_ID from USER_INFO where USER_ID = "{}"'.format(user_id)
@@ -102,7 +102,7 @@ def User_Registration():
         cursor.execute(sql_student)
         db.commit()
         print("注册成功")
-        return "注册成功"
+        return "OK"
     except:
         print('注册失败！')
         return "ERROR"
@@ -141,7 +141,7 @@ def User_Login():
         print('账号不能为空！')
         return "ERROR"
     elif not(re.match('\w{6,12}$', user_password)):
-        print('请输入正确的密码！')
+        print('请输入正确的密码（6-12位）！')
         return "ERROR"
     sql = 'select USER_ID,USER_PASSWORD from USER_INFO where USER_ID = "{}"'.format(user_id)
     cursor.execute(sql)
