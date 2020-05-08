@@ -32,8 +32,12 @@ def Home_page_query(): #首页查询--通过商品名进行查询
     db = pymysql.connect(**config) #对mysql进行连接
     # 初始化游标（创建游标）
     cursor = db.cursor()
+    print(type(capacity))
     capacity=int(capacity)
+    print(type(capacity))
+    print(type(pagination))
     pagination=int(pagination)
+    print(type(pagination))
     if Commodity_name==None:
         sql_Trade=cursor.execute("select * from COMMODITY")
         if sql_Trade>0:
