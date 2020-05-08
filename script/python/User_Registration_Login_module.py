@@ -58,8 +58,8 @@ def User_Registration():
     elif(len(student_name.strip())==0):
         print('姓名不能为空！')
         return "ERROR"
-    elif not(re.match('\w{6,12}$', user_password)):
-        print('请输入正确的密码（6-12位）！')
+    elif not(re.match('\w{6,20}$', user_password)):
+        print('请输入正确的密码（6-20位）！')
         return "ERROR"
     # 2.查询数据库中账号和用户名是否已经被注册
     sql_userid = 'select USER_ID from USER_INFO where USER_ID = "{}"'.format(user_id)
@@ -140,20 +140,21 @@ def User_Login():
     if (len(user_id.strip())==0):
         print('账号不能为空！')
         return "ERROR"
-    elif not(re.match('\w{6,12}$', user_password)):
-        print('请输入正确的密码（6-12位）！')
+    elif not(re.match('\w{6,20}$', user_password)):
+        print('请输入正确的密码（6-20位）！')
         return "ERROR"
     sql = 'select USER_ID,USER_PASSWORD from USER_INFO where USER_ID = "{}"'.format(user_id)
     cursor.execute(sql)
+    result = cursor.fetchone()
     if not cursor.rowcount:
         print("用户不存在")
         return "ERROR"
 
-    if cursor.fetchone()[1] != user_password :
+    if result[1] != user_password :
         print("请输入正确的密码")
         return "ERROR"
     print("登陆成功")
-    return "OK"
+    return result[0]
     
 
 @app.route('/M_I/', methods=[ 'POST','GET'])
@@ -193,6 +194,44 @@ def Modify_Informaion():
     else:
         db.close()
         return "ERROR"
+        
+#@app.route('/S_P/', methods=[ 'POST','GET'])
+#def Save_picture():
+    #print('1')
+    #if request.method == 'POST':
+        #print('2')
+        # data = request.get_data()
+        # print(data)
+        # json_data = json.loads(data.decode('utf-8'))
+        # print(json_data)
+        # name = json_data.get("name")
+        # print(name)
+        # return "OK"
+        #################################
+        #ran_str = ''.join(random.sample(string.ascii_letters + string.digits, 16))  # 生成随机字符串，防止图片名字重复
+        # img = request.files.get('upload')  # 获取图片文件 name = upload
+        # path = "/root/CAMPUS_TRANSACTION/USER_PICTURE"  # 定义一个图片存放的位置 存放在static下面
+        # imgName = ran_str + img.filename  # 图片名称
+        # file_path = path + imgName  # 图片path和名称组成图片的保存路径
+        # img.save(file_path)  # 保存图片
+        # url = path + imgName  # url是图片的路径
+        #f = request.files['file']
+        #name = ran_str+f.filename
+        #upload_path = os.path.join('/root/CAMPUS_TRANSACTION/USER_PICTURE',
+                                   #secure_filename(name))  # 注意：没有的文件夹一定要先创建，不然会提示没有该路径
+        #upload_path = upload_path.replace('\\', '/')
+        #f.save(upload_path)
+        #print(upload_path)
+        #result = upload_path
+
+    #elif request.method == 'GET':
+        #result = "GET"
+        #print('3')
+
+    #else:
+        #print('4')
+        #result = "ERROR"
+    #return result
     
     
 if __name__ == '__main__':
@@ -200,10 +239,3 @@ if __name__ == '__main__':
             ssl_context = 'adhoc'
             # ssl_context=('/root/Campus_Transaction/script/python/cert/3853291.pem','/root/Campus_Transaction/script/python/cert/33853291.key')
            )
-
-
-
-
-
-
-
