@@ -44,7 +44,7 @@ def Home_page_query(): #首页查询--通过商品名进行查询
             return None
     else:    
     #执行查询，并返回受影响的行数
-        sql_Trade_name="select * from COMMODITY where COMMODITY_NAME='{}'".format(Commodity_name) #通过商品名进行查询
+        sql_Trade_name="select * from COMMODITY where COMMODITY_NAME='{}'".format(*Commodity_name) #通过商品名进行查询
         Trade_name=cursor.execute(sql_Trade_name)
         if Trade_name>0:
             para=[]
