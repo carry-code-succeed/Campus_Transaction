@@ -378,8 +378,8 @@ def Home_page_query_pag_cap(): #首页查询--通过商品名进行查询
     #执行查询，并返回受影响的行数
     sql_Trade_name="select * from COMMODITY where COMMODITY_NAME='{}'".format(Commodity_name) #通过商品名进行查询
     Trade_name=cursor.execute(sql_Trade_name)
-    pagination=int(pagination) #将字符串转化为整形
-    capacity=int(capacity)    #将字符串转化为整形
+    #pagination=int(pagination) #将字符串转化为整形
+    #capacity=int(capacity)    #将字符串转化为整形
     if Trade_name>0:
         para = []
         #cursor.execute(sql_Trade_name)
