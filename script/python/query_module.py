@@ -37,7 +37,7 @@ def Home_page_query(): #首页查询--通过商品名进行查询
         result=cursor.fetchall() #返回所有数据集
         #Traverse_to_find_product_result(result)
         for i in result:
-            text ={'商品名':i[2],'价格':i[4],'商品图片':i[5]}
+            text ={'COMMODITY_NAME':i[2],'COMMODITY_PRICE':i[4],'COMMODITY_PICTURE':i[5]}
             para.append(text)
         return json.dumps(para, ensure_ascii=False, indent=4)
     else:
@@ -76,7 +76,7 @@ def Commodity_id_query(): #通过商品ID进行查询
         result=cursor.fetchall() #返回所有数据集
         #Traverse_to_find_product_result_id(result)
         for i in result:
-            text ={'商品ID':i[0],'用户ID':i[1],'商品名':i[2],'商品信息':i[3],'价格':i[4],'商品图片':i[5]}
+            text ={'COMMODITY_ID':i[0],'USER_ID':i[1],'COMMODITY_NAME':i[2],'COMMODITY_INFO':i[3],'COMMODITY_PRICE':i[4],'COMMODITY_PICTURE':i[5]}
             para.append(text)
         return json.dumps(para, ensure_ascii=False, indent=4)
     else:
@@ -114,7 +114,7 @@ def User_name_query(): #通过用户ID进行查询
         result=cursor.fetchall() #返回所有数据集
         #Traverse_to_find_product_result_username(result)
         for i in result:
-            text ={'用户ID':i[1],'商品名':i[2],'价格':i[4],'商品图片':i[5]}
+            text ={'USER_ID':i[1],'COMMODITY_NAME':i[2],'COMMODITY_PRICE':i[4],'COMMODITY_PICTURE':i[5]}
             para.append(text)
         return json.dumps(para, ensure_ascii=False, indent=4)
     else:
@@ -152,7 +152,7 @@ def Home_page_query_commodityname(): #首页查询--通过商品名进行查询-
         result=cursor.fetchall() #返回所有数据集
         #Traverse_to_find_product_result_time(result)
         for i in result:
-            text ={'商品ID':i[0],'商品名':i[2],'价格':i[4],'商品图片':i[5]}
+            text ={'COMMODITY_ID':i[0],'COMMODITY_NAME':i[2],'COMMODITY_PRICE':i[4],'COMMODITY_PICTURE':i[5]}
             para.append(text)
         return json.dumps(para, ensure_ascii=False, indent=4)
     else:
@@ -190,7 +190,7 @@ def Home_page_query_price(): #首页查询--通过商品名进行查询-进行�
         result=cursor.fetchall() #返回所有数据集
         #Traverse_to_find_product_result_price(result)
         for i in result:
-            text ={'商品ID':i[0],'商品名':i[2],'价格':i[4],'商品图片':i[5]}
+            text ={'COMMODITY_ID':i[0],'COMMODITY_NAME':i[2],'COMMODITY_PRICE':i[4],'COMMODITY_PICTURE':i[5]}
             para.append(text)
         return json.dumps(para, ensure_ascii=False, indent=4)
     else:
@@ -228,7 +228,7 @@ def User_information_query(): #用户信息查询
         result=cursor.fetchall() #返回所有数据集
         #User_information_table_result(result)
         for i in result:
-            text ={'用户ID':i[0],'用户名':i[1],'学号':i[2],'头像':i[4]}
+            text ={'USER_ID':i[0],'USER_NAME':i[1],'STUDENT_ID':i[2],'USER_PICTRUE':i[4]}
             para.append(text)
         return json.dumps(para, ensure_ascii=False, indent=4)
     else:
@@ -266,7 +266,7 @@ def All_product_query(): #个人全部商品查询
         result=cursor.fetchall() #返回所有数据集
         #Traverse_to_find_product_result_mycommodity(result)
         for i in result:
-            text ={'商品名':i[2],'商品信息':i[3],'价格':i[4],'商品图片':i[5],'商品状态':i[6]}
+            text ={'COMMODITY_NAME':i[2],'COMMODITY_INFO':i[3],'COMMODITY_PRICE':i[4],'COMMODITY_PICTURE':i[5],'IS_PUTAWAY':i[6]}
             para.append(text)
         return json.dumps(para, ensure_ascii=False, indent=4)
     else:
@@ -304,7 +304,7 @@ def All_product_query_on(): #个人上架中的商品查询
         result=cursor.fetchall() #返回所有数据集
         #Traverse_to_find_product_result_on(result)
         for i in result:
-            text ={'商品名':i[2],'商品信息':i[3],'价格':i[4],'商品图片':i[5],'商品状态':i[6]}
+            text ={'COMMODITY_NAME':i[2],'COMMODITY_INFO':i[3],'COMMODITY_PRICE':i[4],'COMMODITY_PICTURE':i[5],'IS_PUTAWAY':i[6]}
             para.append(text)
         return json.dumps(para, ensure_ascii=False, indent=4)
     else:
@@ -342,7 +342,7 @@ def All_product_query_under(): #个人下架中的商品查询
         result=cursor.fetchall() #返回所有数据集
         #Traverse_to_find_product_result_under(result)
         for i in result:
-            text ={'商品名':i[2],'商品信息':i[3],'价格':i[4],'商品图片':i[5],'商品状态':i[6]}
+            text ={'COMMODITY_NAME':i[2],'COMMODITY_INFO':i[3],'COMMODITY_PRICE':i[4],'COMMODITY_PICTURE':i[5],'IS_PUTAWAY':i[6]}
             para.append(text)
         return json.dumps(para, ensure_ascii=False, indent=4)
     else:
@@ -399,17 +399,18 @@ def Home_page_query_pag_cap(): #首页查询--通过商品名进行查询
     capacity=to_int(capacity)    #将字符串转化为整形
     if Trade_name>0:
         para = []
+        a=[]
         #cursor.execute(sql_Trade_name)
         result=cursor.fetchall() #返回所有数据集       
         x=capacity*(pagination-1)+1
-        print(x)
         #Traverse_to_find_product_result(result)
         for x in range(x,x+capacity):
-            text ={'商品名':result[x-1][2],'价格':result[x-1][4],'商品图片':result[x-1][5]}
+            text ={'COMMODITY_NAME':result[x-1][2],'COMMODITY_PRICE':result[x-1][4],'COMMODITY_PICTURE':result[x-1][5]}
             para.append(text)
         Trade_name=str(Trade_name)
+        a.append(Trade_name)
         pagination=str(pagination)
-        return Trade_name,json.dumps(para, ensure_ascii=False, indent=4)
+        return json.dumps(a, ensure_ascii=False, indent=4),json.dumps(para, ensure_ascii=False, indent=4)
         
     else:
         print('没有找到商品')
