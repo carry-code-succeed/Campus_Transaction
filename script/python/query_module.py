@@ -8,6 +8,24 @@ import time
 app = Flask(__name__)
 
 #通过商品名查询
+def to_int(str):   #将字符串强制转化为整形的函数
+#    if request.method == 'GET':                               
+#        str = request.args.get("str")
+#    elif request.method == 'POST':
+#        data = request.get_data()
+#        json_data = json.loads(data.decode('utf-8'))
+#        str = json_data.get("str")
+    try:
+        int(str)
+        return int(str)
+    except ValueError: #报类型错误，说明不是整型的
+        try:
+            float(str) #用这个来验证，是不是浮点字符串
+            return int(float(str))
+        except ValueError:  #如果报错，说明即不是浮点，也不是int字符串。   是一个真正的字符串
+            return False
+
+
 @app.route('/H_P_Q/', methods=[ 'POST','GET'])
 def Home_page_query(): #首页查询--通过商品名进行查询
     if request.method == 'GET':
@@ -34,12 +52,12 @@ def Home_page_query(): #首页查询--通过商品名进行查询
     cursor = db.cursor() 
     print(capacity)
     print(type(capacity))
-    capacity=int(capacity)
+    capacity=to_int(capacity)
     print(type(capacity))
     print(capacity)
     print(pagination)
     print(type(pagination))
-    pagination=int(pagination)
+    pagination=to_int(pagination)
     print(type(pagination))
     print(pagination)
     if Commodity_name==None:
