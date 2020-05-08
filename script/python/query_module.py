@@ -67,7 +67,7 @@ def Home_page_query(): #首页查询--通过商品名进行查询
             #cursor.execute(sql_Trade_name)
             result=cursor.fetchall() #返回所有数据集        
             x=capacity*(pagination-1)+1
-            Trade_name=str(Trade_name)        
+            sql_Trade=str(sql_Trade)        
             pagination=str(pagination)
             #Traverse_to_find_product_result(result)
             para.append(sql_Trade)
