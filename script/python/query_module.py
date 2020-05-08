@@ -406,7 +406,7 @@ def Home_page_query_pag_cap(): #首页查询--通过商品名进行查询
         for x in range(x,x+capacity):
             text ={'商品名':result[x-1][2],'价格':result[x-1][4],'商品图片':result[x-1][5]}
             para.append(text)
-		 Trade_name=str(Trade_name)
+        Trade_name=str(Trade_name)
         pagination=str(pagination)
         return Trade_name,pagination,json.dumps(para, ensure_ascii=False, indent=4)
         
