@@ -351,14 +351,7 @@ def All_product_query_under(): #个人下架中的商品查询
 
 
 #通过商品名进行查询——具有页码，容量
-@app.route('/T_I/', methods=[ 'POST','GET'])
-def to_int():   #将字符串强制转化为整形的函数
-    if request.method == 'GET':                               
-        str = request.args.get("str")
-    elif request.method == 'POST':
-        data = request.get_data()
-        json_data = json.loads(data.decode('utf-8'))
-        str = json_data.get("str")
+def to_int(str):   #将字符串强制转化为整形的函数
     try:
         int(str)
         return int(str)
