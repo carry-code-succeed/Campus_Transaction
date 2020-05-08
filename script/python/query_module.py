@@ -29,8 +29,10 @@ def Home_page_query(): #首页查询--通过商品名进行查询
     # 初始化游标（创建游标）
     cursor = db.cursor()
     if Commodity_name==():
-        print(*Commodity_name)
+        print(Commodity_name)
+        print(type(Commodity_name))
         sql_Trade=cursor.execute("select * from COMMODITY")
+        print(sql_Trade)
         if sql_Trade>0:
             para=[]
             #cursor.execute(sql_Trade_name)
@@ -45,7 +47,7 @@ def Home_page_query(): #首页查询--通过商品名进行查询
             return None
     else:    
     #执行查询，并返回受影响的行数
-        print(*Commodity_name)
+        print(Commodity_name)
         sql_Trade_name="select * from COMMODITY where COMMODITY_NAME='{}'".format(*Commodity_name) #通过商品名进行查询
         print(sql_Trade_name)
         Trade_name=cursor.execute(sql_Trade_name)
