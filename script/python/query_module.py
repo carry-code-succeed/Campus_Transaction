@@ -11,11 +11,11 @@ app = Flask(__name__)
 @app.route('/H_P_Q/', methods=[ 'POST','GET'])
 def Home_page_query(): #首页查询--通过商品名进行查询
     if request.method == 'GET':
-        Commodity_name = request.args.get("Commodity_name")
+        Commodity_name = request.args.get("*Commodity_name")
     elif request.method == 'POST':
         data = request.get_data()
         json_data = json.loads(data.decode('utf-8'))
-        Commodity_name = json_data.get("Commodity_name")
+        Commodity_name = json_data.get("*Commodity_name")
     # 创建数据库连接
     config = {
         'host': '139.196.203.66',
