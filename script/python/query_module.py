@@ -394,30 +394,21 @@ def Home_page_query_pag_cap(): #首页查询--通过商品名进行查询
     cursor = db.cursor()
     #执行查询，并返回受影响的行数
     sql_Trade_name="select * from COMMODITY where COMMODITY_NAME='{}'".format(Commodity_name) #通过商品名进行查询
-    print(sql_Trade_name)
     Trade_name=cursor.execute(sql_Trade_name)
-    print(Trade_name)
     pagination=to_int(pagination) #将字符串转化为整形
-    print(pagination)
     capacity=to_int(capacity)    #将字符串转化为整形
-    print(capacity)
     if Trade_name>0:
         para = []
         #cursor.execute(sql_Trade_name)
-        result=cursor.fetchall() #返回所有数据集
-        print(result)        
+        result=cursor.fetchall() #返回所有数据集       
         x=capacity*(pagination-1)+1
-        print(x)
         #Traverse_to_find_product_result(result)
         for x in range(x,x+capacity):
             text ={'商品名':result[x-1][2],'价格':result[x-1][4],'商品图片':result[x-1][5]}
-            print(text)
             para.append(text)
         Trade_name=str(Trade_name)
-        print(Trade_name)
         pagination=str(pagination)
-        print(pagination)
-        return Trade_name,pagination,json.dumps(para, ensure_ascii=False, indent=4)
+        return Trade_name,json.dumps(para, ensure_ascii=False, indent=4)
         
     else:
         print('没有找到商品')
