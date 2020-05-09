@@ -75,7 +75,7 @@ def Home_page_query(): #首页查询--通过商品名进行查询
                     for x in range(x,sql_Trade+1):
                         text ={'COMMODITY_ID':result[x-1][0],'COMMODITY_NAME':result[x-1][2],'COMMODITY_PRICE':result[x-1][4],'COMMODITY_PICTURE':result[x-1][5]}
                         para.append(text)
-            else
+            else：
                 for x in range(x,x+capacity):
                     text ={'COMMODITY_ID':result[x-1][0],'COMMODITY_NAME':result[x-1][2],'COMMODITY_PRICE':result[x-1][4],'COMMODITY_PICTURE':result[x-1][5]}
                     para.append(text) 
