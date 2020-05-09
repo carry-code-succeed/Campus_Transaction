@@ -63,7 +63,7 @@ def Home_page_query(): #首页查询--通过商品名进行查询
             sql_Trade=str(sql_Trade)        
             pagination=str(pagination)
             #Traverse_to_find_product_result(result)
-            text={'total':Trade_name}
+            text={'total':sql_Trade}
             data.append(text)
             text={'pagination':pagination}
             #data.append(sql_Trade)
