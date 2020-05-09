@@ -57,7 +57,9 @@ def Home_page_query(): #首页查询--通过商品名进行查询
         if sql_Trade>0:
             para = []
             data=[]
-            y=int(sql_Trade/pagination)
+            y=int(sql_Trade/capacity)
+            if y==0:
+                y=1
             #cursor.execute(sql_Trade_name)
             result=cursor.fetchall() #返回所有数据集        
             x=capacity*(pagination-1)+1
@@ -71,11 +73,11 @@ def Home_page_query(): #首页查询--通过商品名进行查询
             if (capacity*pagination)>sql_Trade:
                 if pagination==y:
                     for x in range(x,sql_Trade+1):
-                        text ={'商品名':result[x-1][2],'价格':result[x-1][4],'商品图片':result[x-1][5]}
+                        text ={'COMMODITY_ID':result[x-1][0],'COMMODITY_NAME':result[x-1][2],'COMMODITY_PRICE':result[x-1][4],'COMMODITY_PICTURE':result[x-1][5]}
                         para.append(text)
             else
                 for x in range(x,x+capacity):
-                    text ={'COMMODITY_NAME':result[x-1][2],'COMMODITY_PRICE':result[x-1][4],'COMMODITY_PICTURE':result[x-1][5]}
+                    text ={'COMMODITY_ID':result[x-1][0],'COMMODITY_NAME':result[x-1][2],'COMMODITY_PRICE':result[x-1][4],'COMMODITY_PICTURE':result[x-1][5]}
                     para.append(text) 
             data.append({'goods':para})
             sql_Trade=str(sql_Trade)        
@@ -89,7 +91,9 @@ def Home_page_query(): #首页查询--通过商品名进行查询
         sql_Trade_name="select * from COMMODITY where COMMODITY_NAME='{}'".format(Commodity_name) #通过商品名进行查询
         Trade_name=cursor.execute(sql_Trade_name)
         if Trade_name>0:  
-            z=int(Trade_name/pagination)
+            z=int(Trade_name/capacity)
+            if z==0:
+                z=1
             para = []
             data =[]
             #cursor.execute(sql_Trade_name)
@@ -105,11 +109,11 @@ def Home_page_query(): #首页查询--通过商品名进行查询
             if (capacity*pagination)>Trade_name:
                 if pagination==z:
                     for x in range(x,Trade_name+1):
-                        text ={'商品名':result[x-1][2],'价格':result[x-1][4],'商品图片':result[x-1][5]}
+                        text ={'COMMODITY_ID':result[x-1][0],'COMMODITY_NAME':result[x-1][2],'COMMODITY_PRICE':result[x-1][4],'COMMODITY_PICTURE':result[x-1][5]}
                         para.append(text)
             else:
                 for x in range(x,x+capacity):
-                    text ={'COMMODITY_NAME':result[x-1][2],'COMMODITY_PRICE':result[x-1][4],'COMMODITY_PICTURE':result[x-1][5]}
+                    text ={'COMMODITY_ID':result[x-1][0],'COMMODITY_NAME':result[x-1][2],'COMMODITY_PRICE':result[x-1][4],'COMMODITY_PICTURE':result[x-1][5]}
                     para.append(text)
             data.append({'goods':para})
             Trade_name=str(Trade_name)        
