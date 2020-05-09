@@ -63,12 +63,17 @@ def Home_page_query(): #首页查询--通过商品名进行查询
             sql_Trade=str(sql_Trade)        
             pagination=str(pagination)
             #Traverse_to_find_product_result(result)
-            data.append(sql_Trade)
-            data.append(pagination)
+            text={'total':Trade_name}
+            data.append(text)
+            text={'pagination':pagination}
+            #data.append(sql_Trade)
+            #data.append(pagination)
+            data.append(text)
+
             for x in range(x,x+capacity):
                 text ={'COMMODITY_NAME':result[x-1][2],'COMMODITY_PRICE':result[x-1][4],'COMMODITY_PICTURE':result[x-1][5]}
                 para.append(text) 
-            data.append(para)           
+            data.append({'goods':para})           
             return json.dumps(data, ensure_ascii=False, indent=4)
         else:
             print('没有找到商品')
@@ -86,12 +91,16 @@ def Home_page_query(): #首页查询--通过商品名进行查询
             Trade_name=str(Trade_name)        
             pagination=str(pagination)
             #Traverse_to_find_product_result(result)
-            data.append(Trade_name)
-            data.append(pagination)
+            text={'total':Trade_name}
+            data.append(text)
+            text={'pagination':pagination}
+            #data.append(Trade_name)
+            #data.append(pagination)
+            data.append(text)
             for x in range(x,x+capacity):
                 text ={'COMMODITY_NAME':result[x-1][2],'COMMODITY_PRICE':result[x-1][4],'COMMODITY_PICTURE':result[x-1][5]}
                 para.append(text)
-            data.append(para)            
+            data.append({'goods':para})            
             return json.dumps(data, ensure_ascii=False, indent=4)
 
         else:
