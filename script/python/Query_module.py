@@ -88,7 +88,7 @@ def Home_page_query(): #首页查询--通过商品名进行查询
             return None
     else:    
     #执行查询，并返回受影响的行数
-        sql_Trade_name="select * from COMMODITY where COMMODITY_NAME='{}'".format(Commodity_name) #通过商品名进行查询
+        sql_Trade_name="select * from COMMODITY where COMMODITY_NAME like '%{}%'".format(Commodity_name) #通过商品名进行查询
         Trade_name=cursor.execute(sql_Trade_name)
         if Trade_name>0:  
             z=int(Trade_name/capacity)
@@ -223,7 +223,7 @@ def Home_page_query_commodityname(): #首页查询--通过商品名进行查询-
     # 初始化游标（创建游标）
     cursor = db.cursor()
     #执行查询，并返回受影响的行数
-    sql_Trade_name="select * from COMMODITY where COMMODITY_NAME ='{}' order by COMMODITY_ID desc".format(Commodity_name) #通过商品名进行查询
+    sql_Trade_name="select * from COMMODITY where COMMODITY_NAME like '%{}%' order by COMMODITY_ID desc".format(Commodity_name) #通过商品名进行查询
     Trade_name=cursor.execute(sql_Trade_name)
     if Trade_name>0:
         para=[]
@@ -261,7 +261,7 @@ def Home_page_query_price(): #首页查询--通过商品名进行查询-进行�
     # 初始化游标（创建游标）
     cursor = db.cursor()
     #执行查询，并返回受影响的行数
-    sql_Trade_name="select * from COMMODITY where COMMODITY_NAME ='{}' order by COMMODITY_PRICE desc".format(Commodity_name) #通过商品名进行查询
+    sql_Trade_name="select * from COMMODITY where COMMODITY_NAME like '%{}%' order by COMMODITY_PRICE desc".format(Commodity_name) #通过商品名进行查询
     Trade_name=cursor.execute(sql_Trade_name)
     if Trade_name>0:
         para=[]
@@ -472,7 +472,7 @@ def Home_page_query_pag_cap(): #首页查询--通过商品名进行查询
     # 初始化游标（创建游标）
     cursor = db.cursor()
     #执行查询，并返回受影响的行数
-    sql_Trade_name="select * from COMMODITY where COMMODITY_NAME='{}'".format(Commodity_name) #通过商品名进行查询
+    sql_Trade_name="select * from COMMODITY where COMMODITY_NAME like '%{}%'".format(Commodity_name) #通过商品名进行查询
     Trade_name=cursor.execute(sql_Trade_name)
     pagination=to_int(pagination) #将字符串转化为整形
     capacity=to_int(capacity)    #将字符串转化为整形
