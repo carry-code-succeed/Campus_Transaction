@@ -1,5 +1,4 @@
-python3 /root/Campus_Transaction/script/python/Administrator_module.py &
-python3 /root/Campus_Transaction/script/python/Upper_and_lower_rack_module.py &
-python3 /root/Campus_Transaction/script/python/User_Registration_Login_module.py &
-python3 /root/Campus_Transaction/script/python/Query_module.py &
-#python3 /root/Campus_Transaction/script/python/ &
+nohup python3 -u /root/Campus_Transaction/script/python/Administrator_module.py > /root/Campus_Transaction/script/python/log/Administrator_module.log 2>&1 &
+nohup python3 -u /root/Campus_Transaction/script/python/Upper_and_lower_rack_module.py > /root/Campus_Transaction/script/python/log/Upper_and_lower_rack_module.log 2>&1 &
+nohup python3 -u /root/Campus_Transaction/script/python/User_Registration_Login_module.py > /root/Campus_Transaction/script/python/log/User_Registration_Login_module.log 2>&1 &
+nohup python3 -u /root/Campus_Transaction/script/python/Query_module.py > /root/Campus_Transaction/script/python/log/Query_module.log 2>&1 &
