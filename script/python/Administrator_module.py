@@ -60,7 +60,9 @@ def Find_item():   # Find_item = 查找商品        NameOrId = 商品名字或�
     else:       # 操作失败，返回 None
         print('没找到商品！')
         db.close()
-        return "NONE"
+        text = {'result':'没找到商品！'}
+        para.append(text)
+        return json.dumps(para, ensure_ascii=False, indent=4)
 
 @app.route('/O_T_S_G/', methods=[ 'POST','GET'])
 def Off_the_shelf_goods():   # Off_the_shelf_goods = 下架商品        COMMODITY_ID = 商品ID
@@ -95,13 +97,17 @@ def Off_the_shelf_goods():   # Off_the_shelf_goods = 下架商品        COMMODI
 #         print(result)
 #         Traverse_to_find_product_results(result)
         db.close()
-        return "OK"
+        text = {'result':'成功'}
+        para.append(text)
+        return json.dumps(para, ensure_ascii=False, indent=4)
     else:       # 操作失败，返回 False
 #         result = cursor.fetchall()  # 返回所有的结果集
 #         print(result)
 #         Traverse_to_find_product_results(result)
         db.close()
-        return "ERROR"
+        text = {'result':'下架商品失败'}
+        para.append(text)
+        return json.dumps(para, ensure_ascii=False, indent=4)
 
 @app.route('/M_U_I/', methods=[ 'POST','GET'])
 def Modify_user_information():   # Modify_user_information = 修改用户信息  USER_ID = 用户ID    Information_name = 信息名称    Information_content = 信息内容
@@ -139,13 +145,17 @@ def Modify_user_information():   # Modify_user_information = 修改用户信息 
 #         print(result)
 #         Traverse_to_find_product_results(result)
         db.close()
-        return "OK"
+        text = {'result':'成功'}
+        para.append(text)
+        return json.dumps(para, ensure_ascii=False, indent=4)
     else:       # 操作失败，返回 False
 #         result = cursor.fetchall()  # 返回所有的结果集
 #         print(result)
 #         Traverse_to_find_product_results(result)
         db.close()
-        return "ERROR"
+        text = {'result':'修改用户信息失败'}
+        para.append(text)
+        return json.dumps(para, ensure_ascii=False, indent=4)
 
 @app.route('/L_O_U_A/', methods=[ 'POST','GET'])
 def Log_off_user_account():   #Log_off_user_account = 注销用户账号  USER_ID = 用户ID
@@ -170,18 +180,31 @@ def Log_off_user_account():   #Log_off_user_account = 注销用户账号  USER_I
     cursor = db.cursor()
     sql_L_O_U_A_1 = "delete from USER_INFO where USER_ID='{}'".format(USER_ID) # sql_L_O_U_A_1 = L_O_U_A_1 Log off user account 注销用户账号
     sql_L_O_U_A_2 = "update STUDENT set IS_REGISTER=null where IS_REGISTER='{}'".format(USER_ID) # sql_L_O_U_A_2 = L_O_U_A_2 Log off user account 注销用户账号
+    sql_D_U_P_R = "delete from COMMODITY where USER_ID='{}'".format(USER_ID) # sql_D_U_P_R = D_U_P_R Delete user product really 真删除用户商品
     L_O_U_A_1 = cursor.execute(sql_L_O_U_A_1)  # 在用户信息表中删除用户账号
     L_O_U_A_2 = cursor.execute(sql_L_O_U_A_2)  # 在学生表中删除用户账号
-    if L_O_U_A_1>0 and L_O_U_A_2>0:     # 如果操作数大于0，表示有对表进行修改，表示sql语句执行成功
+    D_U_P_R = cursor.execute(sql_D_U_P_R)  # 在学生表中真删除用户商品
+    if L_O_U_A_1>0 and L_O_U_A_2>0 and D_U_P_R>0:     # 如果操作数大于0，表示有对表进行修改，表示sql语句执行成功
         L_O_U_A_1 = cursor.execute(sql_L_O_U_A_1)
         db.commit()
         L_O_U_A_2 = cursor.execute(sql_L_O_U_A_2)
         db.commit()
         db.close()
-        return "OK"
-    else:       # 操作失败，返回 False
+        text = {'result':'成功'}
+        para.append(text)
+        return json.dumps(para, ensure_ascii=False, indent=4)
+    else:
+        if L_O_U_A_1 = 0:       # 操作失败
+            text = {'result':'在用户信息表中删除用户账号失败'}
+            para.append(text)
+        elif L_O_U_A_2 = 0:
+            text = {'result': '在学生表中删除用户账号失败'}
+            para.append(text)
+        elif L_O_U_A_2 = 0:
+            text = {'result': '在学生表中真删除用户商品失败'}
+            para.append(text)
         db.close()
-        return "ERROR"
+        return json.dumps(para, ensure_ascii=False, indent=4)
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=6178,
