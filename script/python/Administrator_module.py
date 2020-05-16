@@ -97,7 +97,7 @@ def Off_the_shelf_goods():   # Off_the_shelf_goods = 下架商品        COMMODI
 #         print(result)
 #         Traverse_to_find_product_results(result)
         db.close()
-        text = {'result':'成功'}
+        text = {'result':'成功！'}
         para.append(text)
         return json.dumps(para, ensure_ascii=False, indent=4)
     else:       # 操作失败，返回 False
@@ -105,10 +105,60 @@ def Off_the_shelf_goods():   # Off_the_shelf_goods = 下架商品        COMMODI
 #         print(result)
 #         Traverse_to_find_product_results(result)
         db.close()
-        text = {'result':'下架商品失败'}
+        text = {'result':'下架商品失败！'}
         para.append(text)
         return json.dumps(para, ensure_ascii=False, indent=4)
 
+# 逐一修改
+# @app.route('/M_U_I/', methods=[ 'POST','GET'])
+# def Modify_user_information():   # Modify_user_information = 修改用户信息  USER_ID = 用户ID    Information_name = 信息名称    Information_content = 信息内容
+#     if request.method == 'GET':
+#         USER_ID = request.args.get("USER_ID")
+#         Information_name = request.args.get("Information_name")
+#         Information_content = request.args.get("Information_content")
+#     elif request.method == 'POST':
+#         data = request.get_data()
+#         json_data = json.loads(data.decode('utf-8'))
+#         USER_ID = json_data.get("USER_ID")
+#         Information_name = json_data.get("Information_name")
+#         Information_content = json_data.get("Information_content")
+#     import pymysql   #引入pymysql库
+#     # 创建数据库连接
+#     config = {           # 连接用的字典结构
+#         'host': '139.196.203.66',     # 服务器ip
+#         'port': 3306,       # mysql端口号
+#         'user': 'root',        # mysql登录账号
+#         'passwd': '%E7%A0%81%E5%88%B0%E6%88%90%E5%8A%9F',       # 密码
+#         'db': 'CAMPUS_TRANSACTION_SQL',       # 数据库名字
+#         'charset': 'utf8mb4'
+#     }
+#     db = pymysql.connect(**config)   # 对mysql进行连接
+#     # 初始化游标（创建游标）
+#     cursor = db.cursor()
+#     sql_M_U_I = "update USER_INFO set {}='{}' where USER_ID='{}'".format(Information_name,Information_content,USER_ID)   # sql语句，通过格式化对{}内容输入变量
+#     print(sql_M_U_I)
+#     M_U_I = cursor.execute(sql_M_U_I)
+#     print(M_U_I)
+#     if M_U_I>0:   # 如果操作数大于0，表示有对表进行修改，表示sql语句执行成功
+#         M_U_I = cursor.execute(sql_M_U_I)
+#         db.commit()
+# #         result = cursor.fetchall()  # 返回所有的结果集
+# #         print(result)
+# #         Traverse_to_find_product_results(result)
+#         db.close()
+#         text = {'result':'成功！'}
+#         para.append(text)
+#         return json.dumps(para, ensure_ascii=False, indent=4)
+#     else:       # 操作失败，返回 False
+# #         result = cursor.fetchall()  # 返回所有的结果集
+# #         print(result)
+# #         Traverse_to_find_product_results(result)
+#         db.close()
+#         text = {'result':'修改用户信息失败！'}
+#         para.append(text)
+#         return json.dumps(para, ensure_ascii=False, indent=4)
+
+#全部修改
 @app.route('/M_U_I/', methods=[ 'POST','GET'])
 def Modify_user_information():   # Modify_user_information = 修改用户信息  USER_ID = 用户ID    Information_name = 信息名称    Information_content = 信息内容
     if request.method == 'GET':
@@ -145,7 +195,7 @@ def Modify_user_information():   # Modify_user_information = 修改用户信息 
 #         print(result)
 #         Traverse_to_find_product_results(result)
         db.close()
-        text = {'result':'成功'}
+        text = {'result':'成功！'}
         para.append(text)
         return json.dumps(para, ensure_ascii=False, indent=4)
     else:       # 操作失败，返回 False
@@ -153,7 +203,7 @@ def Modify_user_information():   # Modify_user_information = 修改用户信息 
 #         print(result)
 #         Traverse_to_find_product_results(result)
         db.close()
-        text = {'result':'修改用户信息失败'}
+        text = {'result':'修改用户信息失败！'}
         para.append(text)
         return json.dumps(para, ensure_ascii=False, indent=4)
 
@@ -190,18 +240,18 @@ def Log_off_user_account():   #Log_off_user_account = 注销用户账号  USER_I
         L_O_U_A_2 = cursor.execute(sql_L_O_U_A_2)
         db.commit()
         db.close()
-        text = {'result':'成功'}
+        text = {'result':'成功！'}
         para.append(text)
         return json.dumps(para, ensure_ascii=False, indent=4)
     else:
         if L_O_U_A_1 = 0:       # 操作失败
-            text = {'result':'在用户信息表中删除用户账号失败'}
+            text = {'result':'在用户信息表中删除用户账号失败！'}
             para.append(text)
         elif L_O_U_A_2 = 0:
-            text = {'result': '在学生表中删除用户账号失败'}
+            text = {'result': '在学生表中删除用户账号失败！'}
             para.append(text)
         elif L_O_U_A_2 = 0:
-            text = {'result': '在学生表中真删除用户商品失败'}
+            text = {'result': '在学生表中真删除用户商品失败！'}
             para.append(text)
         db.close()
         return json.dumps(para, ensure_ascii=False, indent=4)
