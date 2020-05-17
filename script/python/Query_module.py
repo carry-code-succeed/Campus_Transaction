@@ -80,12 +80,17 @@ def Home_page_query(): #首页查询--通过商品名进行查询
                     text ={'COMMODITY_ID':result[x-1][0],'COMMODITY_NAME':result[x-1][2],'COMMODITY_PRICE':result[x-1][4],'COMMODITY_PICTURE':result[x-1][5]}
                     para.append(text) 
             data.append({'goods':para})
-            sql_Trade=str(sql_Trade)        
-            pagination=str(pagination)           
+            db.close()
+            # sql_Trade=str(sql_Trade)
+            # pagination=str(pagination)
             return json.dumps(data, ensure_ascii=False, indent=4)
         else:
-            print('没有找到商品')
-            return None
+            print('没找到商品！')
+            db.close()
+            para = []
+            text = {'result': '没找到商品！'}
+            para.append(text)
+            return json.dumps(para, ensure_ascii=False, indent=4)
     else:    
     #执行查询，并返回受影响的行数
         sql_Trade_name="select * from COMMODITY where COMMODITY_NAME like '%{}%'".format(Commodity_name) #通过商品名进行查询
@@ -116,13 +121,18 @@ def Home_page_query(): #首页查询--通过商品名进行查询
                     text ={'COMMODITY_ID':result[x-1][0],'COMMODITY_NAME':result[x-1][2],'COMMODITY_PRICE':result[x-1][4],'COMMODITY_PICTURE':result[x-1][5]}
                     para.append(text)
             data.append({'goods':para})
+            db.close()
             Trade_name=str(Trade_name)        
             pagination=str(pagination)            
             return json.dumps(data, ensure_ascii=False, indent=4)
 
         else:
             print('没有找到商品')
-            return None
+            db.close()
+            para = []
+            text = {'result': '没找到商品！'}
+            para.append(text)
+            return json.dumps(para, ensure_ascii=False, indent=4)
 
 
 #通过商品ID进行查询
@@ -157,10 +167,15 @@ def Commodity_id_query(): #通过商品ID进行查询
         for i in result:
             text ={'COMMODITY_ID':i[0],'USER_ID':i[1],'COMMODITY_NAME':i[2],'COMMODITY_INFO':i[3],'COMMODITY_PRICE':i[4],'COMMODITY_PICTURE':i[5]}
             para.append(text)
+        db.close()
         return json.dumps(para, ensure_ascii=False, indent=4)
     else:
-        print('没有找到商品')
-        return "error"
+        print('没找到商品！')
+        db.close()
+        para = []
+        text = {'result': '没找到商品！'}
+        para.append(text)
+        return json.dumps(para, ensure_ascii=False, indent=4)
 
 
 #通过用户名进行查询
@@ -195,10 +210,15 @@ def User_name_query(): #通过用户ID进行查询
         for i in result:
             text ={'USER_ID':i[1],'COMMODITY_NAME':i[2],'COMMODITY_PRICE':i[4],'COMMODITY_PICTURE':i[5]}
             para.append(text)
+        db.close()
         return json.dumps(para, ensure_ascii=False, indent=4)
     else:
-        print('没有找到商品')
-        return "error"
+        print('没找到商品！')
+        db.close()
+        para = []
+        text = {'result': '没找到商品！'}
+        para.append(text)
+        return json.dumps(para, ensure_ascii=False, indent=4)
 
 
 #通过商品名查询，对时间进行排序
@@ -233,10 +253,15 @@ def Home_page_query_commodityname(): #首页查询--通过商品名进行查询-
         for i in result:
             text ={'COMMODITY_ID':i[0],'COMMODITY_NAME':i[2],'COMMODITY_PRICE':i[4],'COMMODITY_PICTURE':i[5]}
             para.append(text)
+        db.close()
         return json.dumps(para, ensure_ascii=False, indent=4)
     else:
-        print('没有找到商品')
-        return "error"
+        print('没找到商品！')
+        db.close()
+        para = []
+        text = {'result': '没找到商品！'}
+        para.append(text)
+        return json.dumps(para, ensure_ascii=False, indent=4)
 
 
 #通过商品名查询，对价格进行排序
@@ -271,10 +296,15 @@ def Home_page_query_price(): #首页查询--通过商品名进行查询-进行�
         for i in result:
             text ={'COMMODITY_ID':i[0],'COMMODITY_NAME':i[2],'COMMODITY_PRICE':i[4],'COMMODITY_PICTURE':i[5]}
             para.append(text)
+        db.close()
         return json.dumps(para, ensure_ascii=False, indent=4)
     else:
-        print('没有找到商品')
-        return "error"
+        print('没找到商品！')
+        db.close()
+        para = []
+        text = {'result': '没找到商品！'}
+        para.append(text)
+        return json.dumps(para, ensure_ascii=False, indent=4)
 
 
 #通过用户ID查询用户信息表
@@ -309,10 +339,15 @@ def User_information_query(): #用户信息查询
         for i in result:
             text ={'USER_ID':i[0],'USER_NAME':i[1],'STUDENT_ID':i[2],'USER_PICTRUE':i[4]}
             para.append(text)
+        db.close()
         return json.dumps(para, ensure_ascii=False, indent=4)
     else:
-        print('没有找到此用户')
-        return "error"
+        print('没有找到此用户！')
+        db.close()
+        para = []
+        text = {'result': '没有找到此用户！'}
+        para.append(text)
+        return json.dumps(para, ensure_ascii=False, indent=4)
 
 
 #对我的商品进行查询
@@ -347,10 +382,15 @@ def All_product_query(): #个人全部商品查询
         for i in result:
             text ={'COMMODITY_ID':i[0],'COMMODITY_NAME':i[2],'COMMODITY_INFO':i[3],'COMMODITY_PRICE':i[4],'COMMODITY_PICTURE':i[5],'IS_PUTAWAY':i[6]}
             para.append(text)
+        db.close()
         return json.dumps(para, ensure_ascii=False, indent=4)
     else:
-        print('没有找到此用户')
-        return "error"
+        print('没有找到此用户！')
+        db.close()
+        para = []
+        text = {'result': '没有找到此用户！'}
+        para.append(text)
+        return json.dumps(para, ensure_ascii=False, indent=4)
 
 
 #对我的商品上架中进行查询
@@ -385,10 +425,15 @@ def All_product_query_on(): #个人上架中的商品查询
         for i in result:
             text ={'COMMODITY_ID':i[0],'COMMODITY_NAME':i[2],'COMMODITY_INFO':i[3],'COMMODITY_PRICE':i[4],'COMMODITY_PICTURE':i[5],'IS_PUTAWAY':i[6]}
             para.append(text)
+        db.close()
         return json.dumps(para, ensure_ascii=False, indent=4)
     else:
-        print('没有找到此用户')
-        return "error"
+        print('没有找到此用户！')
+        db.close()
+        para = []
+        text = {'result': '没有找到此用户！'}
+        para.append(text)
+        return json.dumps(para, ensure_ascii=False, indent=4)
 
 
 #对我的商品下架中进行查询
@@ -423,29 +468,34 @@ def All_product_query_under(): #个人下架中的商品查询
         for i in result:
             text ={'COMMODITY_ID':i[0],'COMMODITY_NAME':i[2],'COMMODITY_INFO':i[3],'COMMODITY_PRICE':i[4],'COMMODITY_PICTURE':i[5],'IS_PUTAWAY':i[6]}
             para.append(text)
+        db.close()
         return json.dumps(para, ensure_ascii=False, indent=4)
     else:
-        print('没有找到此用户')
-        return "error"
+        print('没有找到此用户！')
+        db.close()
+        para = []
+        text = {'result': '没有找到此用户！'}
+        para.append(text)
+        return json.dumps(para, ensure_ascii=False, indent=4)
 
 
-#通过商品名进行查询——具有页码，容量
-def to_int(str):   #将字符串强制转化为整形的函数
-#    if request.method == 'GET':                               
-#        str = request.args.get("str")
-#    elif request.method == 'POST':
-#        data = request.get_data()
-#        json_data = json.loads(data.decode('utf-8'))
-#        str = json_data.get("str")
-    try:
-        int(str)
-        return int(str)
-    except ValueError: #报类型错误，说明不是整型的
-        try:
-            float(str) #用这个来验证，是不是浮点字符串
-            return int(float(str))
-        except ValueError:  #如果报错，说明即不是浮点，也不是int字符串。   是一个真正的字符串
-            return False
+# #通过商品名进行查询——具有页码，容量
+# def to_int(str):   #将字符串强制转化为整形的函数
+# #    if request.method == 'GET':
+# #        str = request.args.get("str")
+# #    elif request.method == 'POST':
+# #        data = request.get_data()
+# #        json_data = json.loads(data.decode('utf-8'))
+# #        str = json_data.get("str")
+#     try:
+#         int(str)
+#         return int(str)
+#     except ValueError: #报类型错误，说明不是整型的
+#         try:
+#             float(str) #用这个来验证，是不是浮点字符串
+#             return int(float(str))
+#         except ValueError:  #如果报错，说明即不是浮点，也不是int字符串。   是一个真正的字符串
+#             return False
 
 @app.route('/H_P_Q_P_C/', methods=[ 'POST','GET'])
 def Home_page_query_pag_cap(): #首页查询--通过商品名进行查询
@@ -490,11 +540,16 @@ def Home_page_query_pag_cap(): #首页查询--通过商品名进行查询
         for x in range(x,x+capacity):
             text ={'COMMODITY_NAME':result[x-1][2],'COMMODITY_PRICE':result[x-1][4],'COMMODITY_PICTURE':result[x-1][5]}
             para.append(text)
+        db.close()
         return json.dumps(para, ensure_ascii=False, indent=4)
         
     else:
         print('没有找到商品')
-        return "error"
+        db.close()
+        para = []
+        text = {'result': '没找到商品！'}
+        para.append(text)
+        return json.dumps(para, ensure_ascii=False, indent=4)
 
 
 if __name__ == '__main__':
