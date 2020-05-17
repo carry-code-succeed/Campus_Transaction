@@ -55,12 +55,14 @@ def Listing_goods():   # Listing_goods = 上架商品   传入参数和商品表
         result = cursor.fetchall()  # 返回所有的结果集
 #         Traverse_to_find_product_results(result)
         db.close()
+        para = []
         text = {'result':'成功！'}
         para.append(text)
         return json.dumps(para, ensure_ascii=False, indent=4)
     else:       # 操作失败，返回 None
         print('上架商品失败！')
         db.close()
+        para = []
         text = {'result':'上架商品失败！'}
         para.append(text)
         return json.dumps(para, ensure_ascii=False, indent=4)
@@ -98,6 +100,7 @@ def Off_the_shelf_goods():   # Off_the_shelf_goods = 下架商品        COMMODI
 #         print(result)
 #         Traverse_to_find_product_results(result)
         db.close()
+        para = []
         text = {'result':'成功！'}
         para.append(text)
         return json.dumps(para, ensure_ascii=False, indent=4)
@@ -106,6 +109,7 @@ def Off_the_shelf_goods():   # Off_the_shelf_goods = 下架商品        COMMODI
 #         print(result)
 #         Traverse_to_find_product_results(result)
         db.close()
+        para = []
         text = {'result':'下架商品失败！'}
         para.append(text)
         return json.dumps(para, ensure_ascii=False, indent=4)
@@ -163,10 +167,12 @@ def Modify_product_information():        # Modify_product_information = 修改�
         result = cursor.fetchall()  # 返回所有的结果集
         #         Traverse_to_find_product_results(result)
         db.close()
+        para = []
         text = {'result': '成功！'}
         para.append(text)
         return json.dumps(para, ensure_ascii=False, indent=4)
     else:  # 操作失败，返回 None
+        para = []
         if C_N = 0:
             print('修改商品名称失败！')
             text = {'result': '修改商品名称失败！'}
