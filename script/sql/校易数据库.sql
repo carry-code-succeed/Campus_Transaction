@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2020/4/30 19:51:42                           */
+/* Created on:     2020/5/17 15:49:06                           */
 /*==============================================================*/
 
 
@@ -48,6 +48,7 @@ create table STUDENT
 (
    STUDENT_ID           VARCHAR(22) not null,
    STUDENT_NAME         VARCHAR(40) not null,
+   USER_ID              VARCHAR(22),
    IS_REGISTER          VARCHAR(22),
    primary key (STUDENT_ID)
 )
@@ -60,9 +61,14 @@ create table USER_INFO
 (
    USER_ID              VARCHAR(22) not null,
    USER_NAME            VARCHAR(40) not null,
-   STUDENT_ID           VARCHAR(22),
+   STUDENT_ID           VARCHAR(22) not null,
    USER_PASSWORD        VARCHAR(40) not null,
    USER_PICTRUE         VARCHAR(200),
+   QQ_NUMBER            VARCHAR(22),
+   TELEPHONE            VARCHAR(22),
+   SPECIALILZED_SUBJECT VARCHAR(40),
+   GRADE                INT,
+   SEX                  VARCHAR(4),
    primary key (USER_ID),
    unique key UNQ_USER_INFO_USER_NAME (USER_NAME)
 )
