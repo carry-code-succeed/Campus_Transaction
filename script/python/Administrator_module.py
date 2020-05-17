@@ -167,7 +167,6 @@ def Modify_user_information():   # Modify_user_information = 修改用户信息 
     if request.method == 'GET':
         USER_ID = request.args.get("USER_ID")
         USER_NAME = request.args.get("USER_NAME")
-        STUDENT_ID = request.args.get("STUDENT_ID")
         USER_PASSWORD = request.args.get("USER_PASSWORD")
         USER_PICTRUE = request.args.get("USER_PICTRUE")
         QQ_NUMBER = request.args.get("QQ_NUMBER")
