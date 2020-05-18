@@ -173,19 +173,19 @@ def Modify_product_information():        # Modify_product_information = 修改�
         return json.dumps(para, ensure_ascii=False, indent=4)
     else:  # 操作失败，返回 None
         para = []
-        if C_N = 0:
+        if C_N == 0:
             print('修改商品名称失败！')
             text = {'result': '修改商品名称失败！'}
             para.append(text)
-        elif C_I = 0:
+        elif C_I == 0:
             print('修改商品信息失败！')
             text = {'result': '修改商品信息失败！'}
             para.append(text)
-        elif C_P = 0:
+        elif C_P == 0:
             print('修改商品价格失败！')
             text = {'result': '修改商品价格失败！'}
             para.append(text)
-        elif C_PIC = 0:
+        elif C_PIC == 0:
             print('修改商品图片失败！')
             text = {'result': '修改商品图片失败！'}
             para.append(text)
