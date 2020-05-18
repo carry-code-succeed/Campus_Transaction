@@ -218,7 +218,7 @@ def Modify_user_information():   # Modify_user_information = 修改用户信息 
     G = cursor.execute(sql_G)
     S = cursor.execute(sql_S)
     # print(U_N)
-    if U_N > 0 or U_P > 0 or U_PIC > 0 or Q_N > 0 or T > 0 or S_S > 0 or G > 0 or S > 0:   # 如果操作数大于0，表示有对表进行修改，表示sql语句执行成功
+    if U_N>0 or U_P>0 or U_PIC>0 or Q_N>0 or T>0 or S_S>0 or G>0 or S>0:   # 如果操作数大于0，表示有对表进行修改，表示sql语句执行成功
         U_N = cursor.execute(sql_U_N)
         db.commit()
         U_P = cursor.execute(sql_U_P)
@@ -292,13 +292,13 @@ def Log_off_user_account():   #Log_off_user_account = 注销用户账号  USER_I
         return json.dumps(para, ensure_ascii=False, indent=4)
     else:
         para = []
-        if L_O_U_A_1 = 0:       # 操作失败
+        if L_O_U_A_1 == 0:       # 操作失败
             text = {'result':'在用户信息表中删除用户账号失败！'}
             para.append(text)
-        elif L_O_U_A_2 = 0:
+        elif L_O_U_A_2 == 0:
             text = {'result': '在学生表中删除用户账号失败！'}
             para.append(text)
-        elif L_O_U_A_2 = 0:
+        elif L_O_U_A_2 == 0:
             text = {'result': '在学生表中真删除用户商品失败！'}
             para.append(text)
         db.close()
