@@ -1,12 +1,14 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2020/5/17 15:49:06                           */
+/* Created on:     2020/5/22 10:45:59                           */
 /*==============================================================*/
 
 
 drop table if exists ADMIN;
 
 drop table if exists COMMODITY;
+
+drop table if exists HISTORY;
 
 drop table if exists STUDENT;
 
@@ -40,6 +42,16 @@ create table COMMODITY
    primary key (COMMODITY_ID)
 )
 charset = utf8mb4;
+
+/*==============================================================*/
+/* Table: HISTORY                                               */
+/*==============================================================*/
+create table HISTORY
+(
+   USER_ID              VARCHAR(22),
+   TIME                 VARCHAR(20),
+   HISTORY_BROWSING     VARCHAR(20)
+);
 
 /*==============================================================*/
 /* Table: STUDENT                                               */
