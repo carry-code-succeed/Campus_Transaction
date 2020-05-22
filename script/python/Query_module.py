@@ -53,7 +53,7 @@ def Home_page_query(): #首页查询--通过商品名进行查询
     capacity=to_int(capacity)
     pagination=to_int(pagination)
     if Commodity_name=='':
-        sql_Trade=cursor.execute("select * from COMMODITY")
+        sql_Trade=cursor.execute("select * from COMMODITY where IS_PUTAWAY='On_the_shelf'")
         if sql_Trade>0:
             para = []
             data=[]
@@ -93,7 +93,7 @@ def Home_page_query(): #首页查询--通过商品名进行查询
             return json.dumps(para, ensure_ascii=False, indent=4)
     else:    
     #执行查询，并返回受影响的行数
-        sql_Trade_name="select * from COMMODITY where COMMODITY_NAME like '%{}%'".format(Commodity_name) #通过商品名进行查询
+        sql_Trade_name="select * from COMMODITY where COMMODITY_NAME like '%{}%' and IS_PUTAWAY='On_the_shelf'".format(Commodity_name) #通过商品名进行查询
         Trade_name=cursor.execute(sql_Trade_name)
         if Trade_name>0:  
             z=int(Trade_name/capacity)
@@ -200,7 +200,7 @@ def User_name_query(): #通过用户ID进行查询
     # 初始化游标（创建游标）
     cursor = db.cursor()
     #执行查询，并返回受影响的行数
-    sql_id="select * from COMMODITY where USER_ID='{}'".format(User_id) #通过用户ID进行查询
+    sql_id="select * from COMMODITY where USER_ID='{}' and IS_PUTAWAY='On_the_shelf'".format(User_id) #通过用户ID进行查询
     id=cursor.execute(sql_id)
     if id>0:
         para=[]
@@ -208,7 +208,7 @@ def User_name_query(): #通过用户ID进行查询
         result=cursor.fetchall() #返回所有数据集
         #Traverse_to_find_product_result_username(result)
         for i in result:
-            text ={'USER_ID':i[1],'COMMODITY_NAME':i[2],'COMMODITY_PRICE':i[4],'COMMODITY_PICTURE':i[5]}
+            text ={'COMMODITY_ID':i[0],'USER_ID':i[1],'COMMODITY_NAME':i[2],'COMMODITY_PRICE':i[4],'COMMODITY_PICTURE':i[5]}
             para.append(text)
         db.close()
         return json.dumps(para, ensure_ascii=False, indent=4)
@@ -243,7 +243,7 @@ def Home_page_query_commodityname(): #首页查询--通过商品名进行查询-
     # 初始化游标（创建游标）
     cursor = db.cursor()
     #执行查询，并返回受影响的行数
-    sql_Trade_name="select * from COMMODITY where COMMODITY_NAME like '%{}%' order by COMMODITY_ID desc".format(Commodity_name) #通过商品名进行查询
+    sql_Trade_name="select * from COMMODITY where COMMODITY_NAME like '%{}%' and IS_PUTAWAY='On_the_shelf' order by COMMODITY_ID desc".format(Commodity_name) #通过商品名进行查询
     Trade_name=cursor.execute(sql_Trade_name)
     if Trade_name>0:
         para=[]
@@ -286,7 +286,7 @@ def Home_page_query_price(): #首页查询--通过商品名进行查询-进行�
     # 初始化游标（创建游标）
     cursor = db.cursor()
     #执行查询，并返回受影响的行数
-    sql_Trade_name="select * from COMMODITY where COMMODITY_NAME like '%{}%' order by COMMODITY_PRICE desc".format(Commodity_name) #通过商品名进行查询
+    sql_Trade_name="select * from COMMODITY where COMMODITY_NAME like '%{}%' and IS_PUTAWAY='On_the_shelf' order by COMMODITY_PRICE desc".format(Commodity_name) #通过商品名进行查询
     Trade_name=cursor.execute(sql_Trade_name)
     if Trade_name>0:
         para=[]
@@ -337,7 +337,8 @@ def User_information_query(): #用户信息查询
         result=cursor.fetchall() #返回所有数据集
         #User_information_table_result(result)
         for i in result:
-            text ={'USER_ID':i[0],'USER_NAME':i[1],'STUDENT_ID':i[2],'USER_PICTRUE':i[4]}
+            text ={'USER_ID':i[0],'USER_NAME':i[1],'STUDENT_ID':i[2],'USER_PICTRUE':i[4],'USER_PICTRUE':i[5],'QQ_NUMBER':i[6],
+                   'TELEPHONE':i[7],'SPECIALILZED_SUBJECT':i[8],'GRADE':i[9],'SEX':i[10]}
             para.append(text)
         db.close()
         return json.dumps(para, ensure_ascii=False, indent=4)
@@ -522,7 +523,7 @@ def Home_page_query_pag_cap(): #首页查询--通过商品名进行查询
     # 初始化游标（创建游标）
     cursor = db.cursor()
     #执行查询，并返回受影响的行数
-    sql_Trade_name="select * from COMMODITY where COMMODITY_NAME like '%{}%'".format(Commodity_name) #通过商品名进行查询
+    sql_Trade_name="select * from COMMODITY where COMMODITY_NAME like '%{}%' and IS_PUTAWAY='On_the_shelf'".format(Commodity_name) #通过商品名进行查询
     Trade_name=cursor.execute(sql_Trade_name)
     pagination=to_int(pagination) #将字符串转化为整形
     capacity=to_int(capacity)    #将字符串转化为整形
@@ -538,7 +539,7 @@ def Home_page_query_pag_cap(): #首页查询--通过商品名进行查询
         para.append(pagination)
         #Traverse_to_find_product_result(result)
         for x in range(x,x+capacity):
-            text ={'COMMODITY_NAME':result[x-1][2],'COMMODITY_PRICE':result[x-1][4],'COMMODITY_PICTURE':result[x-1][5]}
+            text ={'COMMODITY_ID':result[x-1][0],'COMMODITY_NAME':result[x-1][2],'COMMODITY_PRICE':result[x-1][4],'COMMODITY_PICTURE':result[x-1][5]}
             para.append(text)
         db.close()
         return json.dumps(para, ensure_ascii=False, indent=4)
