@@ -333,7 +333,7 @@ def User_information_query(): #用户信息查询
     Trade_id=cursor.execute(sql_Trade_id)
     if Trade_id>0:
         para=[]
-        cursor.execute(sql_Trade_name)
+        cursor.execute(sql_Trade_id)
         result=cursor.fetchall() #返回所有数据集
         #User_information_table_result(result)
         for i in result:
