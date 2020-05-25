@@ -337,8 +337,7 @@ def User_information_query(): #用户信息查询
         result=cursor.fetchall() #返回所有数据集
         #User_information_table_result(result)
         for i in result:
-            text ={'USER_ID':i[0],'USER_NAME':i[1],'STUDENT_ID':i[2],'USER_PICTRUE':i[4],'USER_PICTRUE':i[5],'QQ_NUMBER':i[6],
-                   'TELEPHONE':i[7],'SPECIALILZED_SUBJECT':i[8],'GRADE':i[9],'SEX':i[10]}
+            text ={'USER_ID':i[0],'USER_NAME':i[1],'STUDENT_ID':i[2],'USER_PICTRUE':i[4],'USER_PICTRUE':i[5],'QQ_NUMBER':i[6],'TELEPHONE':i[7],'SPECIALILZED_SUBJECT':i[8],'GRADE':i[9],'SEX':i[10]}
             para.append(text)
         db.close()
         return json.dumps(para, ensure_ascii=False, indent=4)
