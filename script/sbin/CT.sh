@@ -1,2 +1,2 @@
-cd Campus_Transaction
+cd /root/Campus_Transaction
 git pull
