@@ -154,7 +154,7 @@ def Modify_product_information():        # Modify_product_information = 修改�
     C_I = cursor.execute(sql_C_I)  # C_I  COMMODITY_INFO  商品信息
     C_P = cursor.execute(sql_C_P)  # C_P  COMMODITY_PRICE  商品价格
     C_PIC = cursor.execute(sql_C_PIC)  # C_PIC  COMMODITY_PICTRUE  商品图片
-    if C_N > 0 and C_I > 0 and C_P > 0 and C_PIC > 0:
+    if C_N > 0 or C_I > 0 or C_P > 0 or C_PIC > 0:
         #         cursor.execute(sql_L_G)
         cursor.execute(sql_C_N)
         db.commit()
