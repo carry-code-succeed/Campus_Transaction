@@ -13,7 +13,7 @@ def Listing_goods():   # Listing_goods = 上架商品   传入参数和商品表
         COMMODITY_NAME = request.args.get("COMMODITY_NAME")
         COMMODITY_INFO = request.args.get("COMMODITY_INFO")
         COMMODITY_PRICE = request.args.get("COMMODITY_PRICE")
-        COMMODITY_PICTURE = request.args.get("COMMODITY_PICTURE")
+        COMMODITY_PICTRUE = request.args.get("COMMODITY_PICTURE")
     elif request.method == 'POST':
         data = request.get_data()
         json_data = json.loads(data.decode('utf-8'))
@@ -21,7 +21,7 @@ def Listing_goods():   # Listing_goods = 上架商品   传入参数和商品表
         COMMODITY_NAME = json_data.get("COMMODITY_NAME")
         COMMODITY_INFO = json_data.get("COMMODITY_INFO")
         COMMODITY_PRICE = json_data.get("COMMODITY_PRICE")
-        COMMODITY_PICTURE = json_data.get("COMMODITY_PICTURE")
+        COMMODITY_PICTRUE = json_data.get("COMMODITY_PICTURE")
     import time
     import pymysql   #引入pymysql库
     # 创建数据库连接
@@ -44,7 +44,7 @@ def Listing_goods():   # Listing_goods = 上架商品   传入参数和商品表
          "COMMODITY_NAME":COMMODITY_NAME,
          "COMMODITY_INFO":COMMODITY_INFO,
          "COMMODITY_PRICE":COMMODITY_PRICE,
-         "COMMODITY_PICTRUE":COMMODITY_PICTURE,
+         "COMMODITY_PICTRUE":COMMODITY_PICTRUE,
          "IS_PUTAWAY":"On_the_shelf"}
     sql_L_G="INSERT INTO COMMODITY (COMMODITY_ID,USER_ID,COMMODITY_NAME,COMMODITY_INFO,COMMODITY_PRICE,COMMODITY_PICTRUE,IS_PUTAWAY) VALUES ('{COMMODITY_ID}','{USER_ID}','{COMMODITY_NAME}','{COMMODITY_INFO}',{COMMODITY_PRICE},'{COMMODITY_PICTRUE}','{IS_PUTAWAY}')".format(**nr)
 #     print(sql_L_G)
@@ -121,7 +121,7 @@ def Modify_product_information():        # Modify_product_information = 修改�
         COMMODITY_NAME = request.args.get("COMMODITY_NAME")
         COMMODITY_INFO = request.args.get("COMMODITY_INFO")
         COMMODITY_PRICE = request.args.get("COMMODITY_PRICE")
-        COMMODITY_PICTURE = request.args.get("COMMODITY_PICTURE")
+        COMMODITY_PICTRUE = request.args.get("COMMODITY_PICTURE")
     elif request.method == 'POST':
         data = request.get_data()
         json_data = json.loads(data.decode('utf-8'))
@@ -129,7 +129,7 @@ def Modify_product_information():        # Modify_product_information = 修改�
         COMMODITY_NAME = json_data.get("COMMODITY_NAME")
         COMMODITY_INFO = json_data.get("COMMODITY_INFO")
         COMMODITY_PRICE = json_data.get("COMMODITY_PRICE")
-        COMMODITY_PICTURE = json_data.get("COMMODITY_PICTURE")
+        COMMODITY_PICTRUE = json_data.get("COMMODITY_PICTURE")
     import time
     import pymysql  # 引入pymysql库
     # 创建数据库连接
