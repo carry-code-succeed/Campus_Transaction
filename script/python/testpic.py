@@ -3,7 +3,7 @@ import os
 import json,random,string
 from werkzeug.utils import secure_filename
 os.environ['NLS_LANG'] = 'SIMPLIFIED CHINESE_CHINA.UTF8'
-from flask import Flask,request,send_from_directory
+from flask import Flask,request,send_from_directory,make_response
 
 app = Flask(__name__)
 
@@ -55,6 +55,25 @@ def Download_picture():
     else:
         jieguo = 'ERROR'
         return jieguo
+
+@app.route('/O_P/', methods=[ 'POST','GET'])
+def Open_picture():
+    if request.method == "GET":
+        FileName = request.args.get("FileName")
+    elif request.method == 'POST':
+        data = request.get_data()
+        json_data = json.loads(data.decode('utf-8'))
+        FileName = json_data.get("FileName")
+    file_dir = '/root/CAMPUS_TRANSACTION/USER_PICTURE'
+    if filename is None:
+        jieguo = 'ERROR'
+        return jieguo
+    else:
+        image_data = open(os.path.join(file_dir, '%s' % FileName), "rb").read()
+        jieguo = make_response(image_data)
+        jieguo.headers['Content-Type'] = 'image'
+        return jieguo
+
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=6109,
