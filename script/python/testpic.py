@@ -3,7 +3,7 @@ import os
 import json,random,string
 from werkzeug.utils import secure_filename
 os.environ['NLS_LANG'] = 'SIMPLIFIED CHINESE_CHINA.UTF8'
-from flask import Flask,request
+from flask import Flask,request,send_from_directory
 
 app = Flask(__name__)
 
