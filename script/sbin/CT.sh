@@ -1,0 +1,2 @@
+cd Campus_Transaction
+git pull
