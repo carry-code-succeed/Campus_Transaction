@@ -49,6 +49,7 @@ def Download_picture():
         data = request.get_data()
         json_data = json.loads(data.decode('utf-8'))
         FileName = json_data.get("FileName")
+    print(FileName)
     if os.path.isfile(os.path.join('/root/CAMPUS_TRANSACTION/USER_PICTURE', FileName)):
         jieguo = send_from_directory('/root/CAMPUS_TRANSACTION/USER_PICTURE', FileName, as_attachment=True)
         return jieguo
@@ -65,11 +66,13 @@ def Open_picture():
         json_data = json.loads(data.decode('utf-8'))
         FileName = json_data.get("FileName")
     file_dir = '/root/CAMPUS_TRANSACTION/USER_PICTURE'
+    print(FileName)
     if FileName is None:
         jieguo = 'ERROR'
         return jieguo
     else:
         image_data = open(os.path.join(file_dir, '%s' % FileName), "rb").read()
+        print(image_data)
         jieguo = make_response(image_data)
         jieguo.headers['Content-Type'] = 'image'
         return jieguo
