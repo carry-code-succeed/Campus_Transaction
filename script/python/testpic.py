@@ -49,8 +49,8 @@ def Download_picture():
         data = request.get_data()
         json_data = json.loads(data.decode('utf-8'))
         FileName = json_data.get("FileName")
-    if os.path.isfile(os.path.join('/root/CAMPUS_TRANSACTION/USER_PICTURE', filename)):
-        jieguo = send_from_directory('/home/CAMPUS_TRANSACTION/USER_PICTURE', filename, as_attachment=True)
+    if os.path.isfile(os.path.join('/root/CAMPUS_TRANSACTION/USER_PICTURE', FileName)):
+        jieguo = send_from_directory('/root/CAMPUS_TRANSACTION/USER_PICTURE', FileName, as_attachment=True)
         return jieguo
     else:
         jieguo = 'ERROR'
