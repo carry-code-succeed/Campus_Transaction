@@ -74,6 +74,7 @@ def Open_picture():
         image_data = open(os.path.join(file_dir, '%s' % FileName), "rb").read()
         # print(image_data)
         jieguo = make_response(image_data)
+        print(FileName.split('.',1))
         if FileName.split('.',1) == 'png' or FileName.split('.',1) == 'PNG':
             jieguo.headers['Content-Type'] = 'image/png'
         elif FileName.split('.',1) == 'jpg' or FileName.split('.',1) == 'jpeg' or FileName.split('.',1) == 'JPG' or FileName.split('.',1) == 'JPEG':
