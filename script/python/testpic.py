@@ -65,7 +65,7 @@ def Open_picture():
         json_data = json.loads(data.decode('utf-8'))
         FileName = json_data.get("FileName")
     file_dir = '/root/CAMPUS_TRANSACTION/USER_PICTURE'
-    if filename is None:
+    if FileName is None:
         jieguo = 'ERROR'
         return jieguo
     else:
