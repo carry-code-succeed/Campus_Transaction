@@ -29,7 +29,7 @@ def Save_picture():
         # url = path + imgName  # url是图片的路径
         f = request.files['file']
         name = ran_str+f.filename
-        upload_path = os.path.join('/home/CAMPUS_TRANSACTION/USER_PICTURE',
+        upload_path = os.path.join('/root/CAMPUS_TRANSACTION/USER_PICTURE',
                                    secure_filename(name))  # 注意：没有的文件夹一定要先创建，不然会提示没有该路径
         upload_path = upload_path.replace('\\', '/')
         f.save(upload_path)
@@ -41,32 +41,20 @@ def Save_picture():
         jieguo = "ERROR"
     return jieguo
 
-# @app.route('/D_P/', methods=[ 'POST','GET'])
-# def Download_picture():
-#     if request.method == "GET":
-#         FileName = request.args.get("FileName")
-#     elif request.method == 'POST':
-#         data = request.get_data()
-#         json_data = json.loads(data.decode('utf-8'))
-#         FileName = json_data.get("FileName")
-#
-#         f = request.files['file']
-#         name = ran_str+f.filename
-#         upload_path = os.path.join('/root/CAMPUS_TRANSACTION/USER_PICTURE',
-#                                    secure_filename(name))  # 注意：没有的文件夹一定要先创建，不然会提示没有该路径
-#         upload_path = upload_path.replace('\\', '/')
-#         f.save(upload_path)
-#         print(upload_path)
-#         jieguo = upload_path
-#
-#     elif request.method == 'GET':
-#         jieguo = "GET"
-#         print('3333333333333333333333333')
-#
-#     else:
-#         print('44444444444444444444444444')
-#         jieguo = "ERROR"
-#     return jieguo
+@app.route('/D_P/', methods=[ 'POST','GET'])
+def Download_picture():
+    if request.method == "GET":
+        FileName = request.args.get("FileName")
+    elif request.method == 'POST':
+        data = request.get_data()
+        json_data = json.loads(data.decode('utf-8'))
+        FileName = json_data.get("FileName")
+    if os.path.isfile(os.path.join('/root/CAMPUS_TRANSACTION/USER_PICTURE', filename)):
+        jieguo = send_from_directory('/home/CAMPUS_TRANSACTION/USER_PICTURE', filename, as_attachment=True)
+        return jieguo
+    else:
+        jieguo = 'ERROR'
+        return jieguo
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=6109,
