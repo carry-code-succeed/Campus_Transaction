@@ -179,7 +179,6 @@ def Modify_user_information():   # Modify_user_information = 修改用户信息 
         json_data = json.loads(data.decode('utf-8'))
         USER_ID = json_data.get("USER_ID")
         USER_NAME = json_data.get("USER_NAME")
-        STUDENT_ID = json_data.get("STUDENT_ID")
         # USER_PASSWORD = json_data.get("USER_PASSWORD")
         USER_PICTRUE = json_data.get("USER_PICTRUE")
         QQ_NUMBER = json_data.get("QQ_NUMBER")
