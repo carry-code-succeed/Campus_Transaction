@@ -206,7 +206,7 @@ def Modify_user_information():   # Modify_user_information = 修改用户信息 
     sql_Q_N = "update USER_INFO set QQ_NUMBER='{}' where USER_ID='{}'".format(QQ_NUMBER, USER_ID)
     sql_T = "update USER_INFO set TELEPHONE='{}' where USER_ID='{}'".format(TELEPHONE, USER_ID)
     sql_S_S = "update USER_INFO set SPECIALILZED_SUBJECT='{}' where USER_ID='{}'".format(SPECIALILZED_SUBJECT, USER_ID)
-    sql_G = "update USER_INFO set GRADE='{}' where USER_ID='{}'".format(GRADE, USER_ID)
+    sql_G = "update USER_INFO set GRADE={} where USER_ID='{}'".format(GRADE, USER_ID)
     sql_S = "update USER_INFO set SEX='{}' where USER_ID='{}'".format(SEX, USER_ID)
     # print(sql_U_N)
     U_N = cursor.execute(sql_U_N)
