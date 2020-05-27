@@ -186,7 +186,7 @@ def Modify_user_information():   # Modify_user_information = 修改用户信息 
         SPECIALILZED_SUBJECT = json_data.get("SPECIALILZED_SUBJECT")
         GRADE = json_data.get("GRADE")
         SEX = json_data.get("SEX")
-    if GRADE = '':
+    if GRADE == '':
         GRADE = 0
         print("##############")
         print("GRADE:",GRADE)
