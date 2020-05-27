@@ -199,9 +199,10 @@ def Modify_user_information():   # Modify_user_information = 修改用户信息 
     }
     db = pymysql.connect(**config)   # 对mysql进行连接
     # 初始化游标（创建游标）
+    # update USER_INFO set USER_NAME="lbw" where USER_ID="11233121";
     cursor = db.cursor()
     sql_U_N = "update USER_INFO set USER_NAME='{}' where USER_ID='{}'".format(USER_NAME,USER_ID)   # sql语句，通过格式化对{}内容输入变量
-    sql_U_P = "update USER_INFO set USER_PASSWORD='{}' where USER_ID='{}'".format(USER_PASSWORD, USER_ID)
+    # sql_U_P = "update USER_INFO set USER_PASSWORD='{}' where USER_ID='{}'".format(USER_PASSWORD, USER_ID)
     sql_U_PIC = "update USER_INFO set USER_PICTRUE='{}' where USER_ID='{}'".format(USER_PICTRUE, USER_ID)
     sql_Q_N = "update USER_INFO set QQ_NUMBER='{}' where USER_ID='{}'".format(QQ_NUMBER, USER_ID)
     sql_T = "update USER_INFO set TELEPHONE='{}' where USER_ID='{}'".format(TELEPHONE, USER_ID)
@@ -210,7 +211,7 @@ def Modify_user_information():   # Modify_user_information = 修改用户信息 
     sql_S = "update USER_INFO set SEX='{}' where USER_ID='{}'".format(SEX, USER_ID)
     # print(sql_U_N)
     U_N = cursor.execute(sql_U_N)
-    U_P = cursor.execute(sql_U_P)
+    # U_P = cursor.execute(sql_U_P)
     U_PIC = cursor.execute(sql_U_PIC)
     Q_N = cursor.execute(sql_Q_N)
     T = cursor.execute(sql_T)
@@ -218,11 +219,11 @@ def Modify_user_information():   # Modify_user_information = 修改用户信息 
     G = cursor.execute(sql_G)
     S = cursor.execute(sql_S)
     # print(U_N)
-    if U_N>0 or U_P>0 or U_PIC>0 or Q_N>0 or T>0 or S_S>0 or G>0 or S>0:   # 如果操作数大于0，表示有对表进行修改，表示sql语句执行成功
+    if U_N>0 or U_PIC>0 or Q_N>0 or T>0 or S_S>0 or G>0 or S>0:   # 如果操作数大于0，表示有对表进行修改，表示sql语句执行成功
         U_N = cursor.execute(sql_U_N)
         db.commit()
-        U_P = cursor.execute(sql_U_P)
-        db.commit()
+        # U_P = cursor.execute(sql_U_P)
+        # db.commit()
         U_PIC = cursor.execute(sql_U_PIC)
         db.commit()
         Q_N = cursor.execute(sql_Q_N)
