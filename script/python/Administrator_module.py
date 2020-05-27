@@ -187,7 +187,7 @@ def Modify_user_information():   # Modify_user_information = 修改用户信息 
         SPECIALILZED_SUBJECT = json_data.get("SPECIALILZED_SUBJECT")
         GRADE = json_data.get("GRADE")
         SEX = json_data.get("SEX")
-    print("USER_ID:",USER_ID,"\nUSER_NAME:",USER_NAME,"\nSTUDENT_ID:",STUDENT_ID,"\nUSER_PASSWORD:",USER_PASSWORD,
+    print("USER_ID:",USER_ID,"\nUSER_NAME:",USER_NAME,"\nUSER_PASSWORD:",USER_PASSWORD,
           "\nQQ_NUMBER:",QQ_NUMBER,"\nTELEPHONE:",TELEPHONE,"\nSPECIALILZED_SUBJECT:",SPECIALILZED_SUBJECT,"\nGRADE:",GRADE)
     import pymysql   #引入pymysql库
     # 创建数据库连接
