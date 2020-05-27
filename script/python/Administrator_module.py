@@ -188,6 +188,9 @@ def Modify_user_information():   # Modify_user_information = 修改用户信息 
         SEX = json_data.get("SEX")
     if GRADE is None:
         GRADE = 0
+        print("##############")
+        print("GRADE:",GRADE)
+        print("##############")
     print("USER_ID:",USER_ID,"\nUSER_NAME:",USER_NAME,"\nQQ_NUMBER:",QQ_NUMBER,"\nTELEPHONE:",
           TELEPHONE,"\nSPECIALILZED_SUBJECT:",SPECIALILZED_SUBJECT,"\nGRADE:",GRADE)
     import pymysql   #引入pymysql库
