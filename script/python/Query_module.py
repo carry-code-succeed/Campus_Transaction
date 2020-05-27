@@ -158,7 +158,7 @@ def Commodity_id_query(): #通过商品ID进行查询
     # 初始化游标（创建游标）
     cursor = db.cursor()
     #执行查询，并返回受影响的行数
-    sql_Trade_id="select * from COMMODITY where  COMMODITY_ID='{}' and IS_PUTAWAY='On_the_shelf'".format(Commodity_id) #通过商品ID进行查询
+    sql_Trade_id="select * from COMMODITY where  COMMODITY_ID='{}'".format(Commodity_id) #通过商品ID进行查询
     Trade_id=cursor.execute(sql_Trade_id)
     if Trade_id>0:
         para = []
