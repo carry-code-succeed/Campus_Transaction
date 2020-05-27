@@ -166,7 +166,7 @@ def Commodity_id_query(): #通过商品ID进行查询
         result=cursor.fetchall() #返回所有数据集
         #Traverse_to_find_product_result_id(result)
         for i in result:
-            text ={'COMMODITY_ID':i[0],'USER_ID':i[1],'COMMODITY_NAME':i[2],'COMMODITY_INFO':i[3],'COMMODITY_PRICE':i[4],'COMMODITY_PICTURE':i[5]}
+            text ={'COMMODITY_ID':i[0],'USER_ID':i[1],'COMMODITY_NAME':i[2],'COMMODITY_INFO':i[3],'COMMODITY_PRICE':i[4],'COMMODITY_PICTURE':i[5],'IS_PUTAWAY':i[6]}
             para.append(text)
         db.close()
         return json.dumps(para, ensure_ascii=False, indent=4)
