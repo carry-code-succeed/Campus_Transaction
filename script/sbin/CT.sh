@@ -28,7 +28,7 @@ do
                 	echo `update-restart.sh`
 	elif [ "$num" = "7" ] ;then
 		echo "-------重启mysql数据库--------"
-                	echo `service mysql restart`
+                	service mysql restart
 	elif [ "$num" = "9" ] ;then
 		echo "#######输入数字使用功能#######"
 		echo "1：git pull"
