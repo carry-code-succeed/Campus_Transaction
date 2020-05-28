@@ -1,8 +1,10 @@
 #!/bin/sh
 # 定时重启mysql和模块功能
+declare -i i
+i=1
 while [ "1" != "0" ];do
-	i = 1
 	echo "第$i次重启"
+	i=i+1
 	echo `service mysql restart`
 	echo `date +%Y-%m-%d-%X`
 	restart-CT.sh
