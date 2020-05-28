@@ -11,6 +11,6 @@ echo "启动查询模块"
 nohup python3 -u /root/Campus_Transaction/script/python/Query_module.py > /root/CAMPUS_TRANSACTION/log/Query_module.log 2>&1 &
 echo "启动测试模块"
 nohup python3 -u /root/Campus_Transaction/script/python/testpic.py > /root/CAMPUS_TRANSACTION/log/testpic.log 2>&1 &
-echo "启动定时重启mysql和模块功能"
-nohup timed-restart-mysql.sh  > /root/CAMPUS_TRANSACTION/log/timed-restart-mysql.log 2>&1 &
+# echo "启动定时重启mysql和模块功能"
+# nohup timed-restart-mysql.sh  > /root/CAMPUS_TRANSACTION/log/timed-restart-mysql.log 2>&1 &
 echo "-------启动完成--------"
