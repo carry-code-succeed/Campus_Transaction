@@ -163,7 +163,7 @@ def Off_the_shelf_goods():   # Off_the_shelf_goods = 下架商品        COMMODI
 
 #全部修改
 
-
+'''
 # @app.route('/M_U_I/', methods=[ 'POST','GET'])
 # def Modify_user_information():   # Modify_user_information = 修改用户信息  USER_ID = 用户ID    Information_name = 信息名称    Information_content = 信息内容
 #     if request.method == 'GET':
@@ -273,7 +273,9 @@ def Off_the_shelf_goods():   # Off_the_shelf_goods = 下架商品        COMMODI
 #         text = {'result':'修改用户信息失败！'}
 #         para.append(text)
 #         return json.dumps(para, ensure_ascii=False, indent=4)
+'''
 
+'''
 @app.route('/M_U_I/', methods=[ 'POST','GET'])
 def Modify_user_information():   # Modify_user_information = 修改用户信息  USER_ID = 用户ID    Information_name = 信息名称    Information_content = 信息内容
     if request.method == 'GET':
@@ -401,6 +403,7 @@ def Modify_user_information():   # Modify_user_information = 修改用户信息 
         para.append(text)
     db.close()
     return json.dumps(para, ensure_ascii=False, indent=4)
+'''
 
 @app.route('/L_O_U_A/', methods=[ 'POST','GET'])
 def Log_off_user_account():   #Log_off_user_account = 注销用户账号  USER_ID = 用户ID
@@ -451,6 +454,104 @@ def Log_off_user_account():   #Log_off_user_account = 注销用户账号  USER_I
             text = {'result': '在学生表中真删除用户商品失败！'}
             para.append(text)
         db.close()
+        return json.dumps(para, ensure_ascii=False, indent=4)
+
+@app.route('/M_U_I/', methods=[ 'POST','GET'])
+def Modify_user_information():   # Modify_user_information = 修改用户信息  USER_ID = 用户ID    Information_name = 信息名称    Information_content = 信息内容
+    if request.method == 'GET':
+        USER_ID = request.args.get("USER_ID")
+        USER_NAME = request.args.get("USER_NAME")
+        # USER_PASSWORD = request.args.get("USER_PASSWORD")
+        USER_PICTRUE = request.args.get("USER_PICTRUE")
+        QQ_NUMBER = request.args.get("QQ_NUMBER")
+        TELEPHONE = request.args.get("TELEPHONE")
+        SPECIALILZED_SUBJECT = request.args.get("SPECIALILZED_SUBJECT")
+        GRADE = request.args.get("GRADE")
+        SEX = request.args.get("SEX")
+    elif request.method == 'POST':
+        data = request.get_data()
+        json_data = json.loads(data.decode('utf-8'))
+        USER_ID = json_data.get("USER_ID")
+        USER_NAME = json_data.get("USER_NAME")
+        # USER_PASSWORD = json_data.get("USER_PASSWORD")
+        USER_PICTRUE = json_data.get("USER_PICTRUE")
+        QQ_NUMBER = json_data.get("QQ_NUMBER")
+        TELEPHONE = json_data.get("TELEPHONE")
+        SPECIALILZED_SUBJECT = json_data.get("SPECIALILZED_SUBJECT")
+        GRADE = json_data.get("GRADE")
+        SEX = json_data.get("SEX")
+    if GRADE == '':
+        GRADE = 0
+        print("##############")
+        print("GRADE:",GRADE)
+        print("##############")
+    print("USER_ID:",USER_ID,"\nUSER_NAME:",USER_NAME,"\nQQ_NUMBER:",QQ_NUMBER,"\nTELEPHONE:",
+          TELEPHONE,"\nSPECIALILZED_SUBJECT:",SPECIALILZED_SUBJECT,"\nGRADE:",GRADE)
+    import pymysql   #引入pymysql库
+    # 创建数据库连接
+    config = {           # 连接用的字典结构
+        'host': '139.196.203.66',     # 服务器ip
+        'port': 3306,       # mysql端口号
+        'user': 'root',        # mysql登录账号
+        'passwd': '%E7%A0%81%E5%88%B0%E6%88%90%E5%8A%9F',       # 密码
+        'db': 'CAMPUS_TRANSACTION_SQL',       # 数据库名字
+        'charset': 'utf8mb4'
+    }
+    db = pymysql.connect(**config)   # 对mysql进行连接
+    # 初始化游标（创建游标）
+    # update USER_INFO set USER_NAME="lbw" where USER_ID="11233121";
+    cursor = db.cursor()
+    sql_U_N = "update USER_INFO set USER_NAME='{}' where USER_ID='{}'".format(USER_NAME,USER_ID)   # sql语句，通过格式化对{}内容输入变量
+    print(sql_U_N)
+    # sql_U_P = "update USER_INFO set USER_PASSWORD='{}' where USER_ID='{}'".format(USER_PASSWORD, USER_ID)
+    sql_U_PIC = "update USER_INFO set USER_PICTRUE='{}' where USER_ID='{}'".format(USER_PICTRUE, USER_ID)
+    print(sql_U_PIC)
+    sql_Q_N = "update USER_INFO set QQ_NUMBER='{}' where USER_ID='{}'".format(QQ_NUMBER, USER_ID)
+    print(sql_Q_N)
+    sql_T = "update USER_INFO set TELEPHONE='{}' where USER_ID='{}'".format(TELEPHONE, USER_ID)
+    print(sql_T)
+    sql_S_S = "update USER_INFO set SPECIALILZED_SUBJECT='{}' where USER_ID='{}'".format(SPECIALILZED_SUBJECT, USER_ID)
+    print(sql_S_S)
+    sql_G = "update USER_INFO set GRADE={} where USER_ID='{}'".format(GRADE, USER_ID)
+    print(sql_G)
+    sql_S = "update USER_INFO set SEX='{}' where USER_ID='{}'".format(SEX, USER_ID)
+    print(sql_S)
+    U_N = cursor.execute(sql_U_N)
+    print(U_N)
+    db.commit()
+    # U_P = cursor.execute(sql_U_P)
+    U_PIC = cursor.execute(sql_U_PIC)
+    print(U_PIC)
+    db.commit()
+    Q_N = cursor.execute(sql_Q_N)
+    print(Q_N)
+    db.commit()
+    T = cursor.execute(sql_T)
+    print(T)
+    db.commit()
+    S_S = cursor.execute(sql_S_S)
+    print(S_S)
+    db.commit()
+    G = cursor.execute(sql_G)
+    print(G)
+    db.commit()
+    S = cursor.execute(sql_S)
+    print(S)
+    db.commit()
+    if U_N>0 or U_PIC>0 or Q_N>0 or T>0 or S_S>0 or G>0 or S>0:   # 如果操作数大于0，表示有对表进行修改，表示sql语句执行成功
+        db.close()
+        para = []
+        text = {'result':'成功！'}
+        para.append(text)
+        return json.dumps(para, ensure_ascii=False, indent=4)
+    else:       # 操作失败，返回 False
+#         result = cursor.fetchall()  # 返回所有的结果集
+#         print(result)
+#         Traverse_to_find_product_results(result)
+        db.close()
+        para = []
+        text = {'result':'修改用户信息失败！'}
+        para.append(text)
         return json.dumps(para, ensure_ascii=False, indent=4)
 
 if __name__ == '__main__':
