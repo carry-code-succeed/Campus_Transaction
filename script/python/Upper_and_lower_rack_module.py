@@ -47,7 +47,7 @@ def Listing_goods():   # Listing_goods = 上架商品   传入参数和商品表
          "COMMODITY_PICTRUE":COMMODITY_PICTRUE,
          "IS_PUTAWAY":"On_the_shelf"}
     sql_L_G="INSERT INTO COMMODITY (COMMODITY_ID,USER_ID,COMMODITY_NAME,COMMODITY_INFO,COMMODITY_PRICE,COMMODITY_PICTRUE,IS_PUTAWAY) VALUES ('{COMMODITY_ID}','{USER_ID}','{COMMODITY_NAME}','{COMMODITY_INFO}',{COMMODITY_PRICE},'{COMMODITY_PICTRUE}','{IS_PUTAWAY}')".format(**nr)
-#     print(sql_L_G)
+    # print(sql_L_G)
     L_G = cursor.execute(sql_L_G) # L_G  Listing goods  上架商品
     if L_G > 0:
 #         cursor.execute(sql_L_G)
