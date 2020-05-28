@@ -194,6 +194,87 @@ def Modify_Informaion():
     else:
         db.close()
         return "ERROR"
+
+
+@app.route('/A_H/', methods=[ 'POST','GET'])
+def Add_History():
+    if request.method == "GET":
+        USER_ID = request.args.get("USER_ID")#账号
+        COMMODITY_ID = request.args.get("COMMODITY_ID")#商品ID
+    elif request.method == 'POST':
+        data = request.get_data()
+        json_data = json.loads(data.decode('utf-8'))
+        USER_ID = json_data.get("USER_ID")
+        COMMODITY_ID = json_data.get("COMMODITY_ID")
+
+    import pymysql
+    import time
+    # 创建数据库连接
+    config = {
+        'host': '139.196.203.66',
+        'port': 3306,
+        'user': 'root',
+        'passwd': '%E7%A0%81%E5%88%B0%E6%88%90%E5%8A%9F',
+        'db': 'CAMPUS_TRANSACTION_SQL',
+        'charset': 'utf8mb4'
+    }
+    db = pymysql.connect(**config)
+    # 初始化游标（创建游标）
+    cursor = db.cursor()
+    
+    from datetime import datetime
+    TIME = datetime.now().strftime("%Y-%m-%d %H:%M:%S")#获取时间
+    try:
+        sql='insert into HISTORY values ("{}","{}","{}")'.format(USER_ID,TIME,COMMODITY_ID)
+        cursor.execute(sql)
+        db.commit()
+        return 'Successfully added'
+    except:
+        return 'Add failed'
+
+
+@app.route('/S_H/', methods=[ 'POST','GET'])
+def Show_History():
+    if request.method == "GET":
+        USER_ID = request.args.get("USER_ID")#账号
+       
+    elif request.method == 'POST':
+        data = request.get_data()
+        json_data = json.loads(data.decode('utf-8'))
+        USER_ID = json_data.get("USER_ID")
+    import pymysql
+    import time
+    from flask import jsonify
+    # 创建数据库连接
+    config = {
+        'host': '139.196.203.66',
+        'port': 3306,
+        'user': 'root',
+        'passwd': '%E7%A0%81%E5%88%B0%E6%88%90%E5%8A%9F',
+        'db': 'CAMPUS_TRANSACTION_SQL',
+        'charset': 'utf8mb4'
+    }
+    db = pymysql.connect(**config)
+    # 初始化游标（创建游标）
+    cursor = db.cursor()
+    sql_history = 'select TIME,HISTORY_BROWSING from HISTORY where USER_ID = "{}"'.format(USER_ID)
+    cursor.execute(sql_history)
+    result = cursor.fetchall()
+    all_info = []
+    for i in result:
+        time = i[0].split(" ")[0]
+        commodity_id = i[1]
+        #print(time,commodity_id)
+        sql_show = 'select COMMODITY_NAME,COMMODITY_INFO,COMMODITY_PRICE,COMMODITY_PICTRUE from COMMODITY where COMMODITY_ID = "{}"'.format(commodity_id)
+        cursor.execute(sql_show)
+        commodity = cursor.fetchone()
+        if not commodity is None:
+            info = [time,commodity[0],commodity[1],commodity[2],commodity[3]]
+            all_info.append(info)
+    if len(all_info) == 0:
+        return 'None'
+    else:
+        return jsonify(all_info) 
         
 #@app.route('/S_P/', methods=[ 'POST','GET'])
 #def Save_picture():
