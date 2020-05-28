@@ -25,7 +25,7 @@ do
 	elif [ "$num" = "5" ] ;then
 		echo `rb.sh`
 	elif [ "$num" = "6" ] ;then
-                	echo `start-CT.sh`
+                	echo `uprs.sh`
 	elif [ "$num" = "9" ] ;then
 		echo "#######输入数字使用功能#######"
 		echo "1：git pull"
