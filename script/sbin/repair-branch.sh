@@ -6,3 +6,4 @@ git fetch origin
 git clean -f
 git reset --hard origin/master
 echo "-------修复完成--------"
+/home/sq1.sh
