@@ -88,9 +88,9 @@ def Off_the_shelf_goods():   # Off_the_shelf_goods = 下架商品        COMMODI
     cursor = db.cursor()
     # 执行查询，并返回受影响的行数
     sql_O_T_S_G = "update COMMODITY set IS_PUTAWAY='Admin_dismounts' where COMMODITY_ID='{}' and IS_PUTAWAY='On_the_shelf'".format(COMMODITY_ID)   # sql语句，通过格式化对{}内容输入变量
-    print(sql_O_T_S_G)   # sql_O_T_S_G = O_T_S_G   Off the shelf goods 下架商品
+    # print(sql_O_T_S_G)   # sql_O_T_S_G = O_T_S_G   Off the shelf goods 下架商品
     O_T_S_G = cursor.execute(sql_O_T_S_G)   # O_T_S_G = Off the shelf goods 下架商品
-    print(O_T_S_G)
+    # print(O_T_S_G)
     if O_T_S_G>0:    # 如果操作数大于0，表示有对表进行修改，表示sql语句执行成功
         O_T_S_G = cursor.execute(sql_O_T_S_G)
         db.commit()
@@ -482,11 +482,11 @@ def Modify_user_information():   # Modify_user_information = 修改用户信息 
         SEX = json_data.get("SEX")
     if GRADE == '':
         GRADE = 0
-        print("##############")
-        print("GRADE:",GRADE)
-        print("##############")
-    print("USER_ID:",USER_ID,"\nUSER_NAME:",USER_NAME,"\nQQ_NUMBER:",QQ_NUMBER,"\nTELEPHONE:",
-          TELEPHONE,"\nSPECIALILZED_SUBJECT:",SPECIALILZED_SUBJECT,"\nGRADE:",GRADE)
+    #     print("##############")
+    #     print("GRADE:",GRADE)
+    #     print("##############")
+    # print("USER_ID:",USER_ID,"\nUSER_NAME:",USER_NAME,"\nQQ_NUMBER:",QQ_NUMBER,"\nTELEPHONE:",
+    #       TELEPHONE,"\nSPECIALILZED_SUBJECT:",SPECIALILZED_SUBJECT,"\nGRADE:",GRADE)
     import pymysql   #引入pymysql库
     # 创建数据库连接
     config = {           # 连接用的字典结构
@@ -502,41 +502,41 @@ def Modify_user_information():   # Modify_user_information = 修改用户信息 
     # update USER_INFO set USER_NAME="lbw" where USER_ID="11233121";
     cursor = db.cursor()
     sql_U_N = "update USER_INFO set USER_NAME='{}' where USER_ID='{}'".format(USER_NAME,USER_ID)   # sql语句，通过格式化对{}内容输入变量
-    print(sql_U_N)
+    # print(sql_U_N)
     # sql_U_P = "update USER_INFO set USER_PASSWORD='{}' where USER_ID='{}'".format(USER_PASSWORD, USER_ID)
     sql_U_PIC = "update USER_INFO set USER_PICTRUE='{}' where USER_ID='{}'".format(USER_PICTRUE, USER_ID)
-    print(sql_U_PIC)
+    # print(sql_U_PIC)
     sql_Q_N = "update USER_INFO set QQ_NUMBER='{}' where USER_ID='{}'".format(QQ_NUMBER, USER_ID)
-    print(sql_Q_N)
+    # print(sql_Q_N)
     sql_T = "update USER_INFO set TELEPHONE='{}' where USER_ID='{}'".format(TELEPHONE, USER_ID)
-    print(sql_T)
+    # print(sql_T)
     sql_S_S = "update USER_INFO set SPECIALILZED_SUBJECT='{}' where USER_ID='{}'".format(SPECIALILZED_SUBJECT, USER_ID)
-    print(sql_S_S)
+    # print(sql_S_S)
     sql_G = "update USER_INFO set GRADE={} where USER_ID='{}'".format(GRADE, USER_ID)
-    print(sql_G)
+    # print(sql_G)
     sql_S = "update USER_INFO set SEX='{}' where USER_ID='{}'".format(SEX, USER_ID)
-    print(sql_S)
+    # print(sql_S)
     U_N = cursor.execute(sql_U_N)
-    print(U_N)
+    # print(U_N)
     db.commit()
     # U_P = cursor.execute(sql_U_P)
     U_PIC = cursor.execute(sql_U_PIC)
-    print(U_PIC)
+    # print(U_PIC)
     db.commit()
     Q_N = cursor.execute(sql_Q_N)
-    print(Q_N)
+    # print(Q_N)
     db.commit()
     T = cursor.execute(sql_T)
-    print(T)
+    # print(T)
     db.commit()
     S_S = cursor.execute(sql_S_S)
-    print(S_S)
+    # print(S_S)
     db.commit()
     G = cursor.execute(sql_G)
-    print(G)
+    # print(G)
     db.commit()
     S = cursor.execute(sql_S)
-    print(S)
+    # print(S)
     db.commit()
     if U_N>0 or U_PIC>0 or Q_N>0 or T>0 or S_S>0 or G>0 or S>0:   # 如果操作数大于0，表示有对表进行修改，表示sql语句执行成功
         db.close()
