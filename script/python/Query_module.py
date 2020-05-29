@@ -163,6 +163,7 @@ def Commodity_id_query(): #通过商品ID进行查询
     sql_Trade_id="select * from COMMODITY where  COMMODITY_ID='{}'".format(Commodity_id) #通过商品ID进行查询
     Trade_id=cursor.execute(sql_Trade_id)
     result1 = cursor.fetchall()  # 返回所有数据集
+    User_id = result1[1]
     sql_user = "select * from USER_INFO where USER_ID='{}'".format(User_id)  # 通过用户ID进行查询
     user = cursor.execute(sql_user)
     result2 = cursor.fetchall()  # 返回所有数据集
@@ -171,7 +172,7 @@ def Commodity_id_query(): #通过商品ID进行查询
         #cursor.execute(sql_Trade_picture)
         #Traverse_to_find_product_result_id(result)
         for i in result1:
-            text ={'COMMODITY_ID':i[0],'USER_ID':i[1],'USER_NAME':result2[1],'COMMODITY_NAME':i[2],'COMMODITY_INFO':i[3],'COMMODITY_PRICE':i[4],'COMMODITY_PICTURE':i[5],'IS_PUTAWAY':i[6]}
+            text ={'COMMODITY_ID':i[0],'USER_ID':i[1],'USER_NAME':result2[1],'USER_PICTURE':result2[4],COMMODITY_NAME':i[2],'COMMODITY_INFO':i[3],'COMMODITY_PRICE':i[4],'COMMODITY_PICTURE':i[5],'IS_PUTAWAY':i[6]}
             para.append(text)
         db.close()
         return json.dumps(para, ensure_ascii=False, indent=4)
@@ -217,7 +218,7 @@ def User_name_query(): #通过用户ID进行查询
         #cursor.execute(sql_Trade_picture)
         #Traverse_to_find_product_result_username(result)
         for i in result:
-            text ={'COMMODITY_ID':i[0],'USER_ID':i[1],'USER_NAME':result2[1],'COMMODITY_NAME':i[2],'COMMODITY_PRICE':i[4],'COMMODITY_PICTURE':i[5]}
+            text ={'COMMODITY_ID':i[0],'USER_ID':i[1],'USER_NAME':result2[1],'USER_PICTURE':result2[4],'COMMODITY_NAME':i[2],'COMMODITY_PRICE':i[4],'COMMODITY_PICTURE':i[5]}
             para.append(text)
         db.close()
         return json.dumps(para, ensure_ascii=False, indent=4)
