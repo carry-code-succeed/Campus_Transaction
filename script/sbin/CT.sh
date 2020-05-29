@@ -12,7 +12,8 @@ echo "	7：	打印管理员模块日志文件内容"
 echo "	8：	打印上下架模块日志文件内容"
 echo "	9：	打印注册登录模块日志文件内容"
 echo "	10：	打印查询模块日志文件内容"
-# echo "	11：	打印管理员模块日志文件内容"
+echo "	11：	查看nginx状态"
+echo "	12：	查看mysql状态"
 echo "	99：	重新查看此菜单"
 echo "	0：	退出"
 echo "##########################"
@@ -40,6 +41,10 @@ do
 		cat ~/CAMPUS_TRANSACTION/log/User_Registration_Login_module.log
 	elif [ "$num" = "10" ] ;then
 		cat ~/CAMPUS_TRANSACTION/log/Query_module.log
+	elif [ "$num" = "11" ] ;then
+		service nginx status
+	elif [ "$num" = "12" ] ;then
+		service mysql status
 	elif [ "$num" = "99" ] ;then
 		echo "#######输入数字使用功能#######"
 		echo "	1：	git pull"
