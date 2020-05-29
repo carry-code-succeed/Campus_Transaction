@@ -163,7 +163,7 @@ def Commodity_id_query(): #通过商品ID进行查询
     sql_Trade_id="select * from COMMODITY where  COMMODITY_ID='{}'".format(Commodity_id) #通过商品ID进行查询
     Trade_id=cursor.execute(sql_Trade_id)
     result1 = cursor.fetchall()  # 返回所有数据集
-    User_id = result1[1]
+    User_id = result1[0][1]
     sql_user = "select * from USER_INFO where USER_ID='{}'".format(User_id)  # 通过用户ID进行查询
     user = cursor.execute(sql_user)
     result2 = cursor.fetchall()  # 返回所有数据集
