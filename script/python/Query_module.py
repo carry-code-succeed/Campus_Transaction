@@ -162,13 +162,16 @@ def Commodity_id_query(): #通过商品ID进行查询
     #执行查询，并返回受影响的行数
     sql_Trade_id="select * from COMMODITY where  COMMODITY_ID='{}'".format(Commodity_id) #通过商品ID进行查询
     Trade_id=cursor.execute(sql_Trade_id)
+    result1 = cursor.fetchall()  # 返回所有数据集
+    sql_user = "select * from USER_INFO where USER_ID='{}'".format(User_id)  # 通过用户ID进行查询
+    user = cursor.execute(sql_user)
+    result2 = cursor.fetchall()  # 返回所有数据集
     if Trade_id>0:
         para = []
         #cursor.execute(sql_Trade_picture)
-        result=cursor.fetchall() #返回所有数据集
         #Traverse_to_find_product_result_id(result)
-        for i in result:
-            text ={'COMMODITY_ID':i[0],'USER_ID':i[1],'COMMODITY_NAME':i[2],'COMMODITY_INFO':i[3],'COMMODITY_PRICE':i[4],'COMMODITY_PICTURE':i[5],'IS_PUTAWAY':i[6]}
+        for i in result1:
+            text ={'COMMODITY_ID':i[0],'USER_ID':i[1],'USER_NAME':result2[1],'COMMODITY_NAME':i[2],'COMMODITY_INFO':i[3],'COMMODITY_PRICE':i[4],'COMMODITY_PICTURE':i[5],'IS_PUTAWAY':i[6]}
             para.append(text)
         db.close()
         return json.dumps(para, ensure_ascii=False, indent=4)
@@ -204,14 +207,17 @@ def User_name_query(): #通过用户ID进行查询
     cursor = db.cursor()
     #执行查询，并返回受影响的行数
     sql_id="select * from COMMODITY where USER_ID='{}' and IS_PUTAWAY='On_the_shelf'".format(User_id) #通过用户ID进行查询
-    id=cursor.execute(sql_id)
+    sql_user="select * from USER_INFO where USER_ID='{}'".format(User_id) #通过用户ID进行查询
+    id = cursor.execute(sql_id)
+    result1=cursor.fetchall() #返回所有数据集
+    user = cursor.execute(sql_user)
+    result2 = cursor.fetchall()  # 返回所有数据集
     if id>0:
         para=[]
         #cursor.execute(sql_Trade_picture)
-        result=cursor.fetchall() #返回所有数据集
         #Traverse_to_find_product_result_username(result)
         for i in result:
-            text ={'COMMODITY_ID':i[0],'USER_ID':i[1],'COMMODITY_NAME':i[2],'COMMODITY_PRICE':i[4],'COMMODITY_PICTURE':i[5]}
+            text ={'COMMODITY_ID':i[0],'USER_ID':i[1],'USER_NAME':result2[1],'COMMODITY_NAME':i[2],'COMMODITY_PRICE':i[4],'COMMODITY_PICTURE':i[5]}
             para.append(text)
         db.close()
         return json.dumps(para, ensure_ascii=False, indent=4)
