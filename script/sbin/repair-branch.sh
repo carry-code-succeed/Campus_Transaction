@@ -6,4 +6,4 @@ git fetch origin
 git clean -f
 git reset --hard origin/master
 echo "-------修复完成--------"
-/home/sq1.sh
+/root/Campus_Transaction/script/sbin/set-permissions.sh
