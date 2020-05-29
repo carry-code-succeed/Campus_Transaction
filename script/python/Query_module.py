@@ -98,10 +98,11 @@ def Home_page_query(): #首页查询--通过商品名进行查询
         sql_Trade_name="select * from COMMODITY where COMMODITY_NAME like '%{}%' and IS_PUTAWAY='On_the_shelf'".format(Commodity_name) #通过商品名进行查询
         Trade_name=cursor.execute(sql_Trade_name)
         if Trade_name>0:
-            if sql_Trade / capacity > int(sql_Trade / capacity):
-                z = int(sql_Trade / capacity) + 1
+            tc = Trade_name/capacity
+            if tc > int(tc):
+                z = int(tc) + 1
             else:
-                z = int(sql_Trade / capacity)
+                z = int(tc)
             para = []
             data =[]
             #cursor.execute(sql_Trade_name)
