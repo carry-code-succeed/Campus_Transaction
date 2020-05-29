@@ -38,7 +38,6 @@ def Listing_goods():   # Listing_goods = 上架商品   传入参数和商品表
     cursor = db.cursor()
     # 执行查询，并返回受影响的行数
     ticks = time.strftime("%Y%m%d%H%M%S",time.localtime())
-#     print(ticks)
     nr ={"COMMODITY_ID":ticks,
          "USER_ID":USER_ID,
          "COMMODITY_NAME":COMMODITY_NAME,
@@ -47,13 +46,10 @@ def Listing_goods():   # Listing_goods = 上架商品   传入参数和商品表
          "COMMODITY_PICTRUE":COMMODITY_PICTRUE,
          "IS_PUTAWAY":"On_the_shelf"}
     sql_L_G="INSERT INTO COMMODITY (COMMODITY_ID,USER_ID,COMMODITY_NAME,COMMODITY_INFO,COMMODITY_PRICE,COMMODITY_PICTRUE,IS_PUTAWAY) VALUES ('{COMMODITY_ID}','{USER_ID}','{COMMODITY_NAME}','{COMMODITY_INFO}',{COMMODITY_PRICE},'{COMMODITY_PICTRUE}','{IS_PUTAWAY}')".format(**nr)
-    # print(sql_L_G)
     L_G = cursor.execute(sql_L_G) # L_G  Listing goods  上架商品
     if L_G > 0:
-#         cursor.execute(sql_L_G)
         db.commit()
         result = cursor.fetchall()  # 返回所有的结果集
-#         Traverse_to_find_product_results(result)
         db.close()
         para = []
         text = {'result':'成功！'}
@@ -90,24 +86,16 @@ def Off_the_shelf_goods():   # Off_the_shelf_goods = 下架商品        COMMODI
     cursor = db.cursor()
     # 执行查询，并返回受影响的行数
     sql_O_T_S_G = "update COMMODITY set IS_PUTAWAY='Under_the_shelf' where COMMODITY_ID='{}' and IS_PUTAWAY='On_the_shelf'".format(COMMODITY_ID)   # sql语句，通过格式化对{}内容输入变量
-#     print(sql_O_T_S_G)   # sql_O_T_S_G = O_T_S_G   Off the shelf goods 下架商品
     O_T_S_G = cursor.execute(sql_O_T_S_G)   # O_T_S_G = Off the shelf goods 下架商品
-#     print(O_T_S_G)
     if O_T_S_G > 0:    # 如果操作数大于0，表示有对表进行修改，表示sql语句执行成功
         O_T_S_G = cursor.execute(sql_O_T_S_G)
         db.commit()
-#         result = cursor.fetchall()  # 返回所有的结果集
-#         print(result)
-#         Traverse_to_find_product_results(result)
         db.close()
         para = []
         text = {'result':'成功！'}
         para.append(text)
         return json.dumps(para, ensure_ascii=False, indent=4)
     else:       # 操作失败，返回 False
-#         result = cursor.fetchall()  # 返回所有的结果集
-#         print(result)
-#         Traverse_to_find_product_results(result)
         db.close()
         para = []
         text = {'result':'下架商品失败！'}
@@ -149,13 +137,11 @@ def Modify_product_information():        # Modify_product_information = 修改�
     sql_C_I = "update COMMODITY set COMMODITY_INFO='{}' where COMMODITY_ID='{}'".format(COMMODITY_INFO,COMMODITY_ID)    # 修改商品信息
     sql_C_P = "update COMMODITY set COMMODITY_PRICE='{}' where COMMODITY_ID='{}'".format(COMMODITY_PRICE,COMMODITY_ID)    # 修改商品价格
     sql_C_PIC = "update COMMODITY set COMMODITY_PICTRUE='{}' where COMMODITY_ID='{}'".format(COMMODITY_PICTRUE,COMMODITY_ID)    # 修改商品图片
-    #     print(sql_C_N)
     C_N = cursor.execute(sql_C_N)  # C_N  COMMODITY_NAME  商品名称
     C_I = cursor.execute(sql_C_I)  # C_I  COMMODITY_INFO  商品信息
     C_P = cursor.execute(sql_C_P)  # C_P  COMMODITY_PRICE  商品价格
     C_PIC = cursor.execute(sql_C_PIC)  # C_PIC  COMMODITY_PICTRUE  商品图片
     if C_N > 0 or C_I > 0 or C_P > 0 or C_PIC > 0:
-        #         cursor.execute(sql_L_G)
         cursor.execute(sql_C_N)
         db.commit()
         cursor.execute(sql_C_I)
@@ -165,7 +151,6 @@ def Modify_product_information():        # Modify_product_information = 修改�
         cursor.execute(sql_C_PIC)
         db.commit()
         result = cursor.fetchall()  # 返回所有的结果集
-        #         Traverse_to_find_product_results(result)
         db.close()
         para = []
         text = {'result': '成功！'}
@@ -193,7 +178,5 @@ def Modify_product_information():        # Modify_product_information = 修改�
         return json.dumps(para, ensure_ascii=False, indent=4)
 
 if __name__ == '__main__':
-    app.run(host='127.0.0.1', port=6170,
-            ssl_context = 'adhoc'
-            # ssl_context=('/root/Campus_Transaction/script/python/cert/3853291_campustransaction.xyz.pem','/root/Campus_Transaction/script/python/cert/33853291_campustransaction.xyz.key')
+    app.run(host='127.0.0.1', port=6170,ssl_context = 'adhoc'
            )
