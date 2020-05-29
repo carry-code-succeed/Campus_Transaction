@@ -6,4 +6,4 @@ pwd
 echo "-------git pull--------"
 git pull
 echo "-------pull结束--------"
-set-permissions.sh
+/root/Campus_Transaction/script/sbin/set-permissions.sh
