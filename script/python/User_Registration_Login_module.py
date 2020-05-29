@@ -215,17 +215,29 @@ def Add_History():
     db = pymysql.connect(**config)
     # 初始化游标（创建游标）
     cursor = db.cursor()
+    commodity_ids= []
+    sql = 'select HISTORY_BROWSING from HISTORY where USER_ID = "{}"'.format(USER_ID)
+    cursor.execute(sql)
+    result = cursor.fetchall()
+    for i in result:
+        commodity_ids.append(i[0])
     
     from datetime import datetime
     TIME = datetime.now().strftime("%Y-%m-%d %H:%M:%S")#获取时间
-    try:
+    
+    if COMMODITY_ID in commodity_ids:
+        sql_update = 'update HISTORY set TIME = "{}" where HISTORY_BROWSING = "{}"'.format(TIME,COMMODITY_ID)
+        cursor.execute(sql_update)
+        db.commit()
+        return 'Updated Successfully'
+        db.close()
+    else:
         sql='insert into HISTORY values ("{}","{}","{}")'.format(USER_ID,TIME,COMMODITY_ID)
         cursor.execute(sql)
         db.commit()
         return 'Successfully added'
-    except:
-        return 'Add failed'
-
+        db.close()
+   
 
 @app.route('/S_H/', methods=[ 'POST','GET'])
 def Show_History():
@@ -255,6 +267,14 @@ def Show_History():
     cursor.execute(sql_history)
     result = cursor.fetchall()
     all_info = []
+    info = {
+        'COMMODITY_NAME':' ',
+        'COMMODITY_INFO':' ',
+        'COMMODITY_PRICE':' ',
+        'COMMODITY_PICTRUE':' ',
+        'IS_PUTAWAY':' ',
+        'TIME':' '
+    }
     for i in result:
         time = i[0].split(" ")[0]
         commodity_id = i[1]
@@ -263,8 +283,14 @@ def Show_History():
         cursor.execute(sql_show)
         commodity = cursor.fetchone()
         if not commodity is None:
-            info = [time,commodity[0],commodity[1],commodity[2],commodity[3]]
-            all_info.append(info)
+            info = {
+            'COMMODITY_NAME':commodity[0] ,
+            'COMMODITY_INFO':commodity[1],
+            'COMMODITY_PRICE':commodity[2],
+            'COMMODITY_PICTRUE':commodity[3],
+            'IS_PUTAWAY':commodity[4],
+            'TIME':time
+        }
     if len(all_info) == 0:
         return 'None'
     else:
