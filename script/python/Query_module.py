@@ -9,12 +9,6 @@ app = Flask(__name__)
 
 #通过商品名查询
 def to_int(str):   #将字符串强制转化为整形的函数
-#    if request.method == 'GET':                               
-#        str = request.args.get("str")
-#    elif request.method == 'POST':
-#        data = request.get_data()
-#        json_data = json.loads(data.decode('utf-8'))
-#        str = json_data.get("str")
     try:
         int(str)
         return int(str)
@@ -62,15 +56,11 @@ def Home_page_query(): #首页查询--通过商品名进行查询
                 y = int(sc)+1
             else:
                 y = int(sc)
-            #cursor.execute(sql_Trade_name)
             result=cursor.fetchall() #返回所有数据集        
             x=capacity*(pagination-1)+1
-            #Traverse_to_find_product_result(result)
             text={'total':sql_Trade}
             data.append(text)
             text={'pagination':pagination}
-            #data.append(sql_Trade)
-            #data.append(pagination)
             data.append(text)
             if (capacity*pagination)>sql_Trade:
                 if pagination==y:
@@ -83,8 +73,6 @@ def Home_page_query(): #首页查询--通过商品名进行查询
                     para.append(text) 
             data.append({'goods':para})
             db.close()
-            # sql_Trade=str(sql_Trade)
-            # pagination=str(pagination)
             return json.dumps(data, ensure_ascii=False, indent=4)
         else:
             print('没找到商品！')
@@ -105,15 +93,11 @@ def Home_page_query(): #首页查询--通过商品名进行查询
                 z = int(tc)
             para = []
             data =[]
-            #cursor.execute(sql_Trade_name)
             result=cursor.fetchall() #返回所有数据集        
             x=capacity*(pagination-1)+1
-            #Traverse_to_find_product_result(result)
             text={'total':Trade_name}
             data.append(text)
             text={'pagination':pagination}
-            #data.append(Trade_name)
-            #data.append(pagination)
             data.append(text)
             if (capacity*pagination)>Trade_name:
                 if pagination==z:
@@ -169,8 +153,6 @@ def Commodity_id_query(): #通过商品ID进行查询
     result2 = cursor.fetchall()  # 返回所有数据集
     if Trade_id>0:
         para = []
-        #cursor.execute(sql_Trade_picture)
-        #Traverse_to_find_product_result_id(result)
         for i in result1:
             text ={'COMMODITY_ID':i[0],'USER_ID':i[1],'USER_NAME':result2[0][1],'USER_PICTURE':result2[0][4],'COMMODITY_NAME':i[2],'COMMODITY_INFO':i[3],'COMMODITY_PRICE':i[4],'COMMODITY_PICTURE':i[5],'IS_PUTAWAY':i[6]}
             para.append(text)
@@ -215,8 +197,6 @@ def User_name_query(): #通过用户ID进行查询
     result2 = cursor.fetchall()  # 返回所有数据集
     if id>0:
         para=[]
-        #cursor.execute(sql_Trade_picture)
-        #Traverse_to_find_product_result_username(result)
         for i in result:
             text ={'COMMODITY_ID':i[0],'USER_ID':i[1],'USER_NAME':result2[0][1],'USER_PICTURE':result2[0][4],'COMMODITY_NAME':i[2],'COMMODITY_PRICE':i[4],'COMMODITY_PICTURE':i[5]}
             para.append(text)
@@ -259,8 +239,6 @@ def Home_page_query_commodityname(): #首页查询--通过商品名进行查询-
     pagination = int(pagination)
     capacity = int(capacity)
     #执行查询，并返回受影响的行数
-    # sql_Trade_name="select * from COMMODITY where COMMODITY_NAME like '%{}%' and IS_PUTAWAY='On_the_shelf' order by COMMODITY_ID desc".format(Commodity_name) #通过商品名进行查询
-    # Trade_name=cursor.execute(sql_Trade_name)
     if Commodity_name=='':
         sql_Trade=cursor.execute("select * from COMMODITY where IS_PUTAWAY='On_the_shelf' order by COMMODITY_ID desc")
         if sql_Trade>0:
@@ -270,15 +248,11 @@ def Home_page_query_commodityname(): #首页查询--通过商品名进行查询-
                 y = int(sql_Trade / capacity) + 1
             else:
                 y = int(sql_Trade / capacity)
-            #cursor.execute(sql_Trade_name)
             result=cursor.fetchall() #返回所有数据集
             x=capacity*(pagination-1)+1
-            #Traverse_to_find_product_result(result)
             text={'total':sql_Trade}
             data.append(text)
             text={'pagination':pagination}
-            #data.append(sql_Trade)
-            #data.append(pagination)
             data.append(text)
             if (capacity*pagination)>sql_Trade:
                 if pagination==y:
@@ -291,8 +265,6 @@ def Home_page_query_commodityname(): #首页查询--通过商品名进行查询-
                     para.append(text)
             data.append({'goods':para})
             db.close()
-            # sql_Trade=str(sql_Trade)
-            # pagination=str(pagination)
             return json.dumps(data, ensure_ascii=False, indent=4)
         else:
             print('没找到商品！')
@@ -312,15 +284,11 @@ def Home_page_query_commodityname(): #首页查询--通过商品名进行查询-
                 z = int(sql_Trade / capacity)
             para = []
             data =[]
-            #cursor.execute(sql_Trade_name)
             result=cursor.fetchall() #返回所有数据集
             x=capacity*(pagination-1)+1
-            #Traverse_to_find_product_result(result)
             text={'total':Trade_name}
             data.append(text)
             text={'pagination':pagination}
-            #data.append(Trade_name)
-            #data.append(pagination)
             data.append(text)
             if (capacity*pagination)>Trade_name:
                 if pagination==z:
@@ -384,15 +352,11 @@ def Home_page_query_price(): #首页查询--通过商品名进行查询-进行�
                 y = int(sql_Trade / capacity) + 1
             else:
                 y = int(sql_Trade / capacity)
-            #cursor.execute(sql_Trade_name)
             result=cursor.fetchall() #返回所有数据集
             x=capacity*(pagination-1)+1
-            #Traverse_to_find_product_result(result)
             text={'total':sql_Trade}
             data.append(text)
             text={'pagination':pagination}
-            #data.append(sql_Trade)
-            #data.append(pagination)
             data.append(text)
             if (capacity*pagination)>sql_Trade:
                 if pagination==y:
@@ -405,8 +369,6 @@ def Home_page_query_price(): #首页查询--通过商品名进行查询-进行�
                     para.append(text)
             data.append({'goods':para})
             db.close()
-            # sql_Trade=str(sql_Trade)
-            # pagination=str(pagination)
             return json.dumps(data, ensure_ascii=False, indent=4)
         else:
             print('没找到商品！')
@@ -426,15 +388,11 @@ def Home_page_query_price(): #首页查询--通过商品名进行查询-进行�
                 z = int(sql_Trade / capacity)
             para = []
             data =[]
-            #cursor.execute(sql_Trade_name)
             result=cursor.fetchall() #返回所有数据集
             x=capacity*(pagination-1)+1
-            #Traverse_to_find_product_result(result)
             text={'total':Trade_name}
             data.append(text)
             text={'pagination':pagination}
-            #data.append(Trade_name)
-            #data.append(pagination)
             data.append(text)
             if (capacity*pagination)>Trade_name:
                 if pagination==z:
@@ -527,9 +485,7 @@ def All_product_query(): #个人全部商品查询
     Trade_id=cursor.execute(sql_Trade_id)
     if Trade_id>0:
         para=[]
-        #cursor.execute(sql_Trade_name)
         result=cursor.fetchall() #返回所有数据集
-        #Traverse_to_find_product_result_mycommodity(result)
         for i in result:
             text ={'COMMODITY_ID':i[0],'COMMODITY_NAME':i[2],'COMMODITY_INFO':i[3],'COMMODITY_PRICE':i[4],'COMMODITY_PICTURE':i[5],'IS_PUTAWAY':i[6]}
             para.append(text)
@@ -570,9 +526,7 @@ def All_product_query_on(): #个人上架中的商品查询
     Trade_id=cursor.execute(sql_Trade_id)
     if Trade_id>0:
         para=[]
-        #cursor.execute(sql_Trade_name)
         result=cursor.fetchall() #返回所有数据集
-        #Traverse_to_find_product_result_on(result)
         for i in result:
             text ={'COMMODITY_ID':i[0],'COMMODITY_NAME':i[2],'COMMODITY_INFO':i[3],'COMMODITY_PRICE':i[4],'COMMODITY_PICTURE':i[5],'IS_PUTAWAY':i[6]}
             para.append(text)
@@ -613,9 +567,7 @@ def All_product_query_under(): #个人下架中的商品查询
     Trade_id=cursor.execute(sql_Trade_id)
     if Trade_id>0:
         para=[]
-        #cursor.execute(sql_Trade_name)
         result=cursor.fetchall() #返回所有数据集
-        #Traverse_to_find_product_result_under(result)
         for i in result:
             text ={'COMMODITY_ID':i[0],'COMMODITY_NAME':i[2],'COMMODITY_INFO':i[3],'COMMODITY_PRICE':i[4],'COMMODITY_PICTURE':i[5],'IS_PUTAWAY':i[6]}
             para.append(text)
@@ -628,25 +580,6 @@ def All_product_query_under(): #个人下架中的商品查询
         text = {'result': '没有找到此用户！'}
         para.append(text)
         return json.dumps(para, ensure_ascii=False, indent=4)
-
-
-# #通过商品名进行查询——具有页码，容量
-# def to_int(str):   #将字符串强制转化为整形的函数
-# #    if request.method == 'GET':
-# #        str = request.args.get("str")
-# #    elif request.method == 'POST':
-# #        data = request.get_data()
-# #        json_data = json.loads(data.decode('utf-8'))
-# #        str = json_data.get("str")
-#     try:
-#         int(str)
-#         return int(str)
-#     except ValueError: #报类型错误，说明不是整型的
-#         try:
-#             float(str) #用这个来验证，是不是浮点字符串
-#             return int(float(str))
-#         except ValueError:  #如果报错，说明即不是浮点，也不是int字符串。   是一个真正的字符串
-#             return False
 
 @app.route('/H_P_Q_P_C/', methods=[ 'POST','GET'])
 def Home_page_query_pag_cap(): #首页查询--通过商品名进行查询
@@ -680,14 +613,12 @@ def Home_page_query_pag_cap(): #首页查询--通过商品名进行查询
     if Trade_name>0:
         para = []
         a=[]
-        #cursor.execute(sql_Trade_name)
         result=cursor.fetchall() #返回所有数据集
         x=capacity*(pagination-1)+1
         Trade_name=str(Trade_name)
         pagination=str(pagination)
         para.append(Trade_name)
         para.append(pagination)
-        #Traverse_to_find_product_result(result)
         for x in range(x,x+capacity):
             text ={'COMMODITY_ID':result[x-1][0],'COMMODITY_NAME':result[x-1][2],'COMMODITY_PRICE':result[x-1][4],'COMMODITY_PICTURE':result[x-1][5]}
             para.append(text)
@@ -704,9 +635,5 @@ def Home_page_query_pag_cap(): #首页查询--通过商品名进行查询
 
 
 if __name__ == '__main__':
-#     import os
-#     key_path = os.environ.get("")
-    app.run(host='127.0.0.1', port=6184,
-            ssl_context = 'adhoc'
-            # ssl_context=('/root/Campus_Transaction/script/python/cert/3853291_campustransaction.xyz.pem','/root/Campus_Transaction/script/python/cert/33853291_campustransaction.xyz.key')
+    app.run(host='127.0.0.1', port=6184,ssl_context = 'adhoc'
            )
