@@ -57,10 +57,11 @@ def Home_page_query(): #首页查询--通过商品名进行查询
         if sql_Trade>0:
             para = []
             data=[]
-            if sql_Trade/capacity > int(sql_Trade/capacity):
-                y = int(sql_Trade/capacity)+1
+            sc = sql_Trade/capacity
+            if sc > int(sc):
+                y = int(sc)+1
             else:
-                y = int(sql_Trade / capacity)
+                y = int(sc)
             #cursor.execute(sql_Trade_name)
             result=cursor.fetchall() #返回所有数据集        
             x=capacity*(pagination-1)+1
