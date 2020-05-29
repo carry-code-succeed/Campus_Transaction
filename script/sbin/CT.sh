@@ -24,7 +24,7 @@ do
 	if [ "$num" = "1" ] ;then
 		echo `git-pull.sh`
 	elif [ "$num" = "2" ] ;then
-		echo `start-CT.sh`
+		start-CT.sh
 	elif [ "$num" = "3" ] ;then
 		echo `stop-CT.sh`
 	elif [ "$num" = "4" ] ;then
