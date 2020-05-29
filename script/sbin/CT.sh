@@ -22,17 +22,17 @@ do
 	echo -n "请输入数字："
 	read num
 	if [ "$num" = "1" ] ;then
-		echo `git-pull.sh`
+		git-pull.sh
 	elif [ "$num" = "2" ] ;then
 		start-CT.sh
 	elif [ "$num" = "3" ] ;then
-		echo `stop-CT.sh`
+		stop-CT.sh
 	elif [ "$num" = "4" ] ;then
-		echo `restart-CT.sh`
+		restart-CT.sh
 	elif [ "$num" = "5" ] ;then
-		echo `repair-branch.sh`
+		repair-branch.sh
 	elif [ "$num" = "6" ] ;then
-                	echo `update-restart.sh`
+                	update-restart.sh
 	elif [ "$num" = "7" ] ;then
 		cat ~/CAMPUS_TRANSACTION/log/Administrator_module.log
 	elif [ "$num" = "8" ] ;then
