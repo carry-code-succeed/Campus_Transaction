@@ -172,7 +172,7 @@ def Commodity_id_query(): #通过商品ID进行查询
         #cursor.execute(sql_Trade_picture)
         #Traverse_to_find_product_result_id(result)
         for i in result1:
-            text ={'COMMODITY_ID':i[0],'USER_ID':i[1],'USER_NAME':result2[0][1],'USER_PICTURE':result2[0][4],COMMODITY_NAME':i[2],'COMMODITY_INFO':i[3],'COMMODITY_PRICE':i[4],'COMMODITY_PICTURE':i[5],'IS_PUTAWAY':i[6]}
+            text ={'COMMODITY_ID':i[0],'USER_ID':i[1],'USER_NAME':result2[0][1],'USER_PICTURE':result2[0][4],'COMMODITY_NAME':i[2],'COMMODITY_INFO':i[3],'COMMODITY_PRICE':i[4],'COMMODITY_PICTURE':i[5],'IS_PUTAWAY':i[6]}
             para.append(text)
         db.close()
         return json.dumps(para, ensure_ascii=False, indent=4)
