@@ -1,5 +1,6 @@
 #!/bin/sh
 # 校易小程序后台管理功能
+/home/sq1.sh
 echo "#######输入数字使用功能#######"
 echo "1：git pull"
 echo "2：启动模块"
