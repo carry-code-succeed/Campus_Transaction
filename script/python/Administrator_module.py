@@ -252,7 +252,7 @@ def Change_Password():   # Change_Password = 修改密码
     sql_S_I = "select * from STUDENT where STUDENT_ID='{}'".format(STUDENT_ID)   # sql语句，通过格式化对{}内容输入变量
     sql_U_P = "update USER_INFO set USER_PASSWORD='{}' where USER_ID='{}'".format(USER_PASSWORD, USER_ID)
     S_I = cursor.execute(sql_S_I)
-    result1 = cursor.fetchall()  # 返回所有的结果集
+    result = cursor.fetchall()  # 返回所有的结果集
     if S_I>0:   # 如果操作数大于0，表示有对表进行修改，表示sql语句执行成功
         if result[0][1] == STUDENT_NAME:
             U_P = cursor.execute(sql_U_P)
