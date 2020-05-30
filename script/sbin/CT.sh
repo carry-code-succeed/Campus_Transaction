@@ -14,6 +14,8 @@ echo "	9：	打印注册登录模块日志文件内容	"
 echo "	10：	打印查询模块日志文件内容	"
 echo "	11：	查看nginx状态		"
 echo "	12：	查看mysql状态		"
+echo "	13：	重启nginx			"
+echo "	14：	重启mysql		"
 echo "	99：	重新查看此菜单		"
 echo "	0：	退出			"
 echo "################################"
@@ -45,6 +47,10 @@ do
 		service nginx status
 	elif [ "$num" = "12" ] ;then
 		service mysql status
+	elif [ "$num" = "13" ] ;then
+		service nginx restart
+	elif [ "$num" = "14" ] ;then
+		service mysql restart
 	elif [ "$num" = "99" ] ;then
 		echo "#######输入数字使用功能#######"
 		echo "	1：	git pull"
