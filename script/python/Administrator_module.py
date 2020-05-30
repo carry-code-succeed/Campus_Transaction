@@ -222,6 +222,66 @@ def Modify_user_information():   # Modify_user_information = 修改用户信息 
         para.append(text)
         return json.dumps(para, ensure_ascii=False, indent=4)
 
+@app.route('/C_P/', methods=[ 'POST','GET'])
+def Change_Password():   # Change_Password = 修改密码
+    if request.method == 'GET':
+        USER_ID = request.args.get("USER_ID")
+        STUDENT_ID = request.args.get("STUDENT_ID")
+        STUDENT_NAME = request.args.get("STUDENT_NAME")
+        PASSWORD = request.args.get("PASSWORD")
+    elif request.method == 'POST':
+        data = request.get_data()
+        json_data = json.loads(data.decode('utf-8'))
+        USER_ID = json_data.get("USER_ID")
+        STUDENT_ID = json_data.get("STUDENT_ID")
+        STUDENT_NAME = json_data.get("STUDENT_NAME")
+        PASSWORD = json_data.get("PASSWORD")
+    import pymysql   #引入pymysql库
+    # 创建数据库连接
+    config = {           # 连接用的字典结构
+        'host': '139.196.203.66',     # 服务器ip
+        'port': 3306,       # mysql端口号
+        'user': 'root',        # mysql登录账号
+        'passwd': '%E7%A0%81%E5%88%B0%E6%88%90%E5%8A%9F',       # 密码
+        'db': 'CAMPUS_TRANSACTION_SQL',       # 数据库名字
+        'charset': 'utf8mb4'
+    }
+    db = pymysql.connect(**config)   # 对mysql进行连接
+    # 初始化游标（创建游标）
+    cursor = db.cursor()
+    sql_S_I = "select * from STUDENT where STUDENT_ID='{}'".format(STUDENT_ID)   # sql语句，通过格式化对{}内容输入变量
+    sql_U_P = "update USER_INFO set USER_PASSWORD='{}' where USER_ID='{}'".format(USER_PASSWORD, USER_ID)
+    S_I = cursor.execute(sql_S_I)
+    result1 = cursor.fetchall()  # 返回所有的结果集
+    if S_I>0:   # 如果操作数大于0，表示有对表进行修改，表示sql语句执行成功
+        if result[0][1] == STUDENT_NAME:
+            U_P = cursor.execute(sql_U_P)
+            db.commit()
+            if U_P > 0:
+                db.close()
+                para = []
+                text = {'result':'成功！'}
+                para.append(text)
+                return json.dumps(para, ensure_ascii=False, indent=4)
+            else:
+                db.close()
+                para = []
+                text = {'result': '修改用户密码失败！'}
+                para.append(text)
+                return json.dumps(para, ensure_ascii=False, indent=4)
+        else:
+            db.close()
+            para = []
+            text = {'result': '学号验证失败！'}
+            para.append(text)
+            return json.dumps(para, ensure_ascii=False, indent=4)
+    else:       # 操作失败，返回 False
+        db.close()
+        para = []
+        text = {'result':'未找到学号信息！'}
+        para.append(text)
+        return json.dumps(para, ensure_ascii=False, indent=4)
+
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=6178,ssl_context = 'adhoc'
            )
