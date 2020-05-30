@@ -167,9 +167,22 @@ def User_Login():
     if result[1] != password :
         print("请输入正确的密码")
         return "ERROR"
-    print("登陆成功")
+    if result[1] != password :
+        print("请输入正确的密码")
+        return "ERROR"
+    from flask import jsonify
+    if id in users:
+        info = {
+            'ID':result[0],
+            'IDENTTY':'USER',
+        }
+    else:
+        info = {
+            'ID':result[0],
+            'IDENTTY':'ADMIN',
+        }
     db.close()
-    return 'USERS' if id in users else 'ADMIN' 
+    return jsonify(info)
     
 
 @app.route('/M_I/', methods=[ 'POST','GET'])
@@ -289,7 +302,7 @@ def Show_History():
     result = cursor.fetchall()
     all_info = []
     info = {
-        'COMMODITY__ID':' ',
+        'COMMODITY_ID':' ',
         'COMMODITY_NAME':' ',
         'COMMODITY_INFO':' ',
         'COMMODITY_PRICE':' ',
@@ -301,13 +314,13 @@ def Show_History():
         time = i[0]
         commodity_id = i[1]
         #print(time,commodity_id)
-        sql_show = 'select COMMODITY__ID,COMMODITY_NAME,COMMODITY_INFO,COMMODITY_PRICE,COMMODITY_PICTRUE,IS_PUTAWAY from COMMODITY where COMMODITY_ID = "{}"'.format(commodity_id)
+        sql_show = 'select COMMODITY_ID,COMMODITY_NAME,COMMODITY_INFO,COMMODITY_PRICE,COMMODITY_PICTRUE,IS_PUTAWAY from COMMODITY where COMMODITY_ID = "{}"'.format(commodity_id)
         cursor.execute(sql_show)
         commodity = cursor.fetchone()
         if not commodity is None:
             info = {
-                'COMMODITY__ID':commodity[0]
-                'COMMODITY_NAME':commodity[1] ,
+                'COMMODITY_ID':commodity[0],
+                'COMMODITY_NAME':commodity[1],
                 'COMMODITY_INFO':commodity[2],
                 'COMMODITY_PRICE':commodity[3],
                 'COMMODITY_PICTRUE':commodity[4],
