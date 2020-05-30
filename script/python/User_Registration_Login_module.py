@@ -108,13 +108,13 @@ def User_Registration():
 #登录
 def User_Login():
     if request.method == "GET":
-        user_id = request.args.get("user_id")#账号
-        user_password = request.args.get("user_password")#密码
+        id = request.args.get("id")#账号
+        password = request.args.get("password")#密码
     elif request.method == 'POST':
         data = request.get_data()
         json_data = json.loads(data.decode('utf-8'))
-        user_id = json_data.get("user_id")
-        user_password = json_data.get("user_password")
+        id = json_data.get("id")
+        password = json_data.get("password")
     
     import pymysql
     config = {           # 连接用的字典结构
@@ -131,24 +131,45 @@ def User_Login():
     # 创建游标
     cursor = db.cursor()
 
-    if (len(user_id.strip())==0):
+    if (len(id.strip())==0):
         print('账号不能为空！')
         return "ERROR"
-    elif not(re.match('\w{6,20}$', user_password)):
+    elif not(re.match('\w{6,20}$', password)):
         print('请输入正确的密码（6-20位）！')
         return "ERROR"
-    sql = 'select USER_ID,USER_PASSWORD from USER_INFO where USER_ID = "{}"'.format(user_id)
-    cursor.execute(sql)
-    result = cursor.fetchone()
-    if not cursor.rowcount:
+    
+    users = []
+    admins = []
+    cursor = db.cursor()
+    sql_user = 'select USER_ID from USER_INFO'
+    cursor.execute(sql_user)
+    user = cursor.fetchall()
+    for i in user:
+        users.append(i[0])
+
+    sql_admin = 'select ADMIN_ID from ADMIN'
+    cursor.execute(sql_admin)
+    admin = cursor.fetchall()
+    for i in  admin:
+        admins.append(i[0])
+    
+    if id in users:
+        sql = 'select USER_ID,USER_PASSWORD from USER_INFO where USER_ID = "{}"'.format(id)
+    elif id in admins:
+        sql = 'select ADMIN_ID,ADMIN_PASSWORD from ADMIN where ADMIN_ID = "{}"'.format(id)
+    else:
         print("用户不存在")
         return "ERROR"
-
-    if result[1] != user_password :
+    
+    cursor.execute(sql)
+    result = cursor.fetchone()
+    
+    if result[1] != password :
         print("请输入正确的密码")
         return "ERROR"
     print("登陆成功")
-    return result[0]
+    db.close()
+    return (result[0]+' USER') if id in users else (result[0]+' ADMIN')    
     
 
 @app.route('/M_I/', methods=[ 'POST','GET'])
@@ -276,24 +297,31 @@ def Show_History():
         'TIME':' '
     }
     for i in result:
-        time = i[0].split(" ")[0]
+        time = i[0]
         commodity_id = i[1]
         #print(time,commodity_id)
-        sql_show = 'select COMMODITY_NAME,COMMODITY_INFO,COMMODITY_PRICE,COMMODITY_PICTRUE from COMMODITY where COMMODITY_ID = "{}"'.format(commodity_id)
+        sql_show = 'select COMMODITY_NAME,COMMODITY_INFO,COMMODITY_PRICE,COMMODITY_PICTRUE,IS_PUTAWAY from COMMODITY where COMMODITY_ID = "{}"'.format(commodity_id)
         cursor.execute(sql_show)
         commodity = cursor.fetchone()
         if not commodity is None:
             info = {
-            'COMMODITY_NAME':commodity[0] ,
-            'COMMODITY_INFO':commodity[1],
-            'COMMODITY_PRICE':commodity[2],
-            'COMMODITY_PICTRUE':commodity[3],
-            'IS_PUTAWAY':commodity[4],
-            'TIME':time
-        }
+                'COMMODITY_NAME':commodity[0] ,
+                'COMMODITY_INFO':commodity[1],
+                'COMMODITY_PRICE':commodity[2],
+                'COMMODITY_PICTRUE':commodity[3],
+                'IS_PUTAWAY':commodity[4],
+                'TIME':time
+            }
+            all_info.append(info)
     if len(all_info) == 0:
         return 'None'
     else:
+        for i in range(0,len(all_info)-1):
+            for j in range(0,len(all_info)-i-1):
+                if all_info[j]['TIME'] < all_info[j+1]['TIME']:
+                    temp = all_info[j]
+                    all_info[j] = all_info[j+1]
+                    all_info[j+1] = temp
         return jsonify(all_info) 
         
 #@app.route('/S_P/', methods=[ 'POST','GET'])
