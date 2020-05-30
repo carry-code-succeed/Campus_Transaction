@@ -228,14 +228,14 @@ def Change_Password():   # Change_Password = 修改密码
         USER_ID = request.args.get("USER_ID")
         STUDENT_ID = request.args.get("STUDENT_ID")
         STUDENT_NAME = request.args.get("STUDENT_NAME")
-        PASSWORD = request.args.get("PASSWORD")
+        PASSWORD = request.args.get("USER_PASSWORD")
     elif request.method == 'POST':
         data = request.get_data()
         json_data = json.loads(data.decode('utf-8'))
         USER_ID = json_data.get("USER_ID")
         STUDENT_ID = json_data.get("STUDENT_ID")
         STUDENT_NAME = json_data.get("STUDENT_NAME")
-        PASSWORD = json_data.get("PASSWORD")
+        PASSWORD = json_data.get("USER_PASSWORD")
     import pymysql   #引入pymysql库
     # 创建数据库连接
     config = {           # 连接用的字典结构
