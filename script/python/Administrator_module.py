@@ -124,9 +124,15 @@ def Log_off_user_account():   #Log_off_user_account = 注销用户账号  USER_I
     sql_L_O_U_A_1 = "delete from USER_INFO where USER_ID='{}'".format(USER_ID) # sql_L_O_U_A_1 = L_O_U_A_1 Log off user account 注销用户账号
     sql_L_O_U_A_2 = "update STUDENT set IS_REGISTER=null where IS_REGISTER='{}'".format(USER_ID) # sql_L_O_U_A_2 = L_O_U_A_2 Log off user account 注销用户账号
     sql_D_U_P_R = "delete from COMMODITY where USER_ID='{}'".format(USER_ID) # sql_D_U_P_R = D_U_P_R Delete user product really 真删除用户商品
+    print(sql_L_O_U_A_1)
+    print(sql_L_O_U_A_2)
+    print(sql_D_U_P_R)
     L_O_U_A_1 = cursor.execute(sql_L_O_U_A_1)  # 在用户信息表中删除用户账号
     L_O_U_A_2 = cursor.execute(sql_L_O_U_A_2)  # 在学生表中删除用户账号
     D_U_P_R = cursor.execute(sql_D_U_P_R)  # 在学生表中真删除用户商品
+    print(L_O_U_A_1)
+    print(L_O_U_A_2)
+    print(D_U_P_R)
     if L_O_U_A_1>0 and L_O_U_A_2>0:     # 如果操作数大于0，表示有对表进行修改，表示sql语句执行成功
         L_O_U_A_1 = cursor.execute(sql_L_O_U_A_1)
         db.commit()
