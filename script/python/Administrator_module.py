@@ -127,16 +127,28 @@ def Log_off_user_account():   #Log_off_user_account = 注销用户账号  USER_I
     L_O_U_A_1 = cursor.execute(sql_L_O_U_A_1)  # 在用户信息表中删除用户账号
     L_O_U_A_2 = cursor.execute(sql_L_O_U_A_2)  # 在学生表中删除用户账号
     D_U_P_R = cursor.execute(sql_D_U_P_R)  # 在学生表中真删除用户商品
-    if L_O_U_A_1>0 and L_O_U_A_2>0 and D_U_P_R>0:     # 如果操作数大于0，表示有对表进行修改，表示sql语句执行成功
+    if L_O_U_A_1>0 and L_O_U_A_2>0:     # 如果操作数大于0，表示有对表进行修改，表示sql语句执行成功
         L_O_U_A_1 = cursor.execute(sql_L_O_U_A_1)
         db.commit()
         L_O_U_A_2 = cursor.execute(sql_L_O_U_A_2)
         db.commit()
+        D_U_P_R = cursor.execute(sql_D_U_P_R)
+        db.commit()
         db.close()
-        para = []
-        text = {'result':'成功！'}
-        para.append(text)
-        return json.dumps(para, ensure_ascii=False, indent=4)
+        if (D_U_P_R > 0):
+            para = []
+            text = {'result':'成功！'}
+            para.append(text)
+            text = {'result':'删除商品成功！'}
+            para.append(text)
+            return json.dumps(para, ensure_ascii=False, indent=4)
+        else:
+            para = []
+            text = {'result': '成功！'}
+            para.append(text)
+            text = {'result': '删除商品失败！'}
+            para.append(text)
+            return json.dumps(para, ensure_ascii=False, indent=4)
     else:
         para = []
         if L_O_U_A_1 == 0:       # 操作失败
