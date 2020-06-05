@@ -1,6 +1,7 @@
 # -*- coding: UTF-8 -*-
 import os
 import json
+import hashlib
 os.environ['NLS_LANG'] = 'SIMPLIFIED CHINESE_CHINA.UTF8'
 from flask import Flask,request
 
@@ -267,6 +268,9 @@ def Change_Password():   # Change_Password = 修改密码
     db = pymysql.connect(**config)   # 对mysql进行连接
     # 初始化游标（创建游标）
     cursor = db.cursor()
+    md5 = hashlib.md5()
+    md5.update(USER_PASSWORD.encode('utf8'))
+    USER_PASSWORD = md5.hexdigest()
     sql_S_I = "select * from STUDENT where STUDENT_ID='{}'".format(STUDENT_ID)   # sql语句，通过格式化对{}内容输入变量
     sql_U_P = "update USER_INFO set USER_PASSWORD='{}' where USER_ID='{}'".format(USER_PASSWORD, USER_ID)
     S_I = cursor.execute(sql_S_I)
